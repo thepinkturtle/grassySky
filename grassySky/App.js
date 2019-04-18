@@ -39,7 +39,7 @@ export default class HelloWorldApp extends Component {
             alert("You head West");
           }}
         />
-        <OutputBox setOutputText={ text }> text</OutputBox>
+        <OutputBox setOutputText={ text }></OutputBox>
       </View>
     );
   }
