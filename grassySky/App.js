@@ -25,7 +25,7 @@ export default class HelloWorldApp extends Component {
         <CustomButton 
           text="S"
           onPress={() => {
-            this.setState({displayText:"You head South."})
+            this.setState({displayText:"You head South.You notice a strange aperation on the horizon. You stop, and wonder if it's safe to continue down this path."})
           }}
         />
 
@@ -42,7 +42,7 @@ export default class HelloWorldApp extends Component {
             this.setState({displayText:"You head West."})
           }}
         />
-        <Text style={ styles.textStyle }>{this.state.displayText}</Text>
+        <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
       </View>
     );
   }
@@ -82,10 +82,20 @@ const styles = StyleSheet.create( {
 
   textStyle: {
     fontSize:20,
-    width: "100%",
-    color: 'gray',
+    color: 'lightgray',
     alignItems: 'center',
     justifyContent: 'center',
+    textAlign: 'center',
+  },
+  
+  displayStyle: {
+    fontSize:20,
+    backgroundColor: "lightgrey",
+    width: "100%",
+    color: 'gray',
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     textAlign: 'center',
   },
 
