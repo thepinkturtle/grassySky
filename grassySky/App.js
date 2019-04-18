@@ -42,7 +42,7 @@ export default class HelloWorldApp extends Component {
             this.setState({displayText:"You head West."})
           }}
         />
-        <ScrollView>
+        <ScrollView style={styles.scrollViewStyle} >
           <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
         </ScrollView>
       </View>
@@ -93,11 +93,10 @@ const styles = StyleSheet.create( {
   displayStyle: {
     fontSize:20,
     backgroundColor: "lightgrey",
-    width: "100%",
     color: 'gray',
     flex: 1,
     justifyContent: 'flex-end',
-    alignItems: 'center',
+    alignSelf: "stretch",
     textAlign: 'center',
   },
 
@@ -109,5 +108,11 @@ const styles = StyleSheet.create( {
     borderRadius:5,
     borderWidth: 5,
     margin: 5,
-    }
+    },
+  
+  scrollViewStyle: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "flex-end",
+  }
 })
