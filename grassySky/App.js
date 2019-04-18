@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ScrollView } from 'react-native';
 
 export default class HelloWorldApp extends Component {
   constructor( props ){
@@ -42,7 +42,9 @@ export default class HelloWorldApp extends Component {
             this.setState({displayText:"You head West."})
           }}
         />
-        <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
+        <ScrollView>
+          <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
+        </ScrollView>
       </View>
     );
   }
