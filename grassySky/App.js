@@ -6,65 +6,43 @@ import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native';
 
 export default class HelloWorldApp extends Component {
-  
+  constructor( props ){
+    super( props );
+    this.state={
+      displayText: 'Hello Traveller',
+    }
+  }
   render() {
-    var text = '';
     return (
       <View style={{ flex: 1, alignItems: "flex-end" }}>
         <CustomButton 
           text="N"
           onPress={() => {
-            text = 'You head North';
-            alert("You head North");
+            this.setState({displayText:"You head North."})
           }}
         />
         
         <CustomButton 
           text="S"
           onPress={() => {
-            alert("You head South");
+            this.setState({displayText:"You head South."})
           }}
         />
 
         <CustomButton 
           text="E"
           onPress={() => {
-            alert("You head East");
+            this.setState({displayText:"You head East."})
           }}
         />
 
         <CustomButton 
           text="W"
           onPress={() => {
-            alert("You head West");
+            this.setState({displayText:"You head West."})
           }}
         />
-        <OutputBox setOutputText={ text }></OutputBox>
-      </View>
-    );
-  }
-}
-class Square extends Component {
-  constructor( props ){
-    super( props );
-  }
-  render() {
-    return (
-      <View style={styles.square}>
-        <Text>background</Text>
-      </View>
-    );
-  }
-}
-
-class Rectangle extends Component {
-  constructor( props ) {
-    super(props);
-  }
-  render(){
-    return(
-      <View style={styles.rectangle}>
-        <Text>here</Text>
+        <Text style={ styles.textStyle }>{this.state.displayText}</Text>
       </View>
     );
   }
@@ -83,59 +61,10 @@ class CustomButton extends Component {
 	}
 }
 
-CustomButton.propTypes = {
-  text: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired
-};
-
-class Grid extends Component {
-  constructor( props ){
-    super( props );
-  }
-
-  checkRow = (event) => {
-    alert('check row');
-  };
-  checkCol = (event) => {
-    alert('check col');
-  };
-
-  render() {
-    return (
-      <View>
-        <Text>Welcome to React Native</Text>
-      </View>
-    );
-  }
-}
-
-class OutputBox extends Component {
-  constructor( props ) {
-    super( props );
-    this.state = {
-      outputText: 'Welcome Traveller'
-    };
-  }
-
-  setOutputText = () => {
-    this.setState({ outputText: 'I changed' } );
-  };
-
-  render() {
-    return (
-      <View style={ styles.outputBox }>
-        <Text>{this.state.outputText}</Text>
-      </View>
-    );
-  }
-
-  
-}
-
 const styles = StyleSheet.create( {
 
   outputBox: {
-    backgroundColor: 'blue',
+    backgroundColor: 'grey',
     width: '100%',
     height: 50,
     alignItems: 'center',
@@ -153,8 +82,11 @@ const styles = StyleSheet.create( {
 
   textStyle: {
     fontSize:20,
-    color: '#ffffff',
-    textAlign: 'center'
+    width: "100%",
+    color: 'gray',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
   },
 
   buttonStyle: {
