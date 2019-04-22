@@ -5,7 +5,13 @@ import { StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import { TouchableOpacity, ScrollView } from 'react-native';
 
+var grid=new Array(100)
+
+for (i=0; i <100; i++)
+    myarray[i]=new Array(100);
+
 export default class HelloWorldApp extends Component {
+  
   constructor( props ){
     super( props );
     this.state={
