@@ -7,8 +7,15 @@ import { TouchableOpacity, ScrollView } from 'react-native';
 
 var grid=new Array(100)
 
-for (i=0; i <100; i++)
-    myarray[i]=new Array(100);
+for ( var i = 0; i < 100; i++) {
+  grid[i]=new Array(100);
+  for ( var j = 0; j < 100; j++ ) {
+    grid[ i ][ j ] = 0;
+  }
+}
+
+var currentX = 0;
+var currentY = 0;
 
 export default class HelloWorldApp extends Component {
   
@@ -25,6 +32,11 @@ export default class HelloWorldApp extends Component {
           text="N"
           onPress={() => {
             this.setState({displayText:"You head North."})
+            grid[ currentX ][ currentY ] = 1;
+            if( currentY < 100 )
+              currentY++;
+            else
+              this.setState({ displayText:"There is no path this way, you turn around." })
           }}
         />
         
