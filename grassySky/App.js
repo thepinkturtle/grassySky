@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import { TouchableOpacity, ScrollView } from 'react-native';
+import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 
 var grid=new Array(100)
 
@@ -28,7 +28,9 @@ export default class HelloWorldApp extends Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: "flex-end" }}>
-        <CustomButton 
+        <ImageBackground
+          source={require("./Resources/background.png")} style={ styles.image}>
+          <CustomButton 
           text="N"
           onPress={() => {
             this.setState({displayText:"You head North."})
@@ -40,15 +42,13 @@ export default class HelloWorldApp extends Component {
             else {
               this.setState({ displayText:"There is no path this way, you turn around." })
             }
-            alert("here postion x: " + currentX + " postion y: " + currentY);
-
           }}
         />
         
         <CustomButton 
           text="S"
           onPress={() => {
-            this.setState({displayText:"You head South.You notice a strange aperation on the horizon. You stop, and wonder if it's safe to continue down this path."})
+            this.setState({displayText:"You head South."})
             if( currentY > 0 ) {
               grid[ currentX ][ currentY ] = 1;
               currentY--;
@@ -56,8 +56,6 @@ export default class HelloWorldApp extends Component {
             else {
               this.setState({ displayText:"There is no path this way, you turn around." })
             }
-            alert("postion x: " + currentX + " postion y: " + currentY);
-
           }}
         />
 
@@ -73,8 +71,6 @@ export default class HelloWorldApp extends Component {
               this.setState({ displayText:"There is no path this way, you turn around." })
 
             }
-            alert("postion x: " + currentX + " postion y: " + currentY);
-
           }}
         />
 
@@ -89,14 +85,26 @@ export default class HelloWorldApp extends Component {
             else{
               this.setState({ displayText:"There is no path this way, you turn around." })
             }
-            alert("postion x: " + currentX + " postion y: " + currentY);
           }
         }
         />
-        
+
         <ScrollView style={styles.scrollViewStyle} >
           <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
         </ScrollView>
+        </ImageBackground>
+      </View>
+    );
+  }
+}
+
+class BackgroundImage extends Component {
+  render() {
+    return (
+      <View>
+        <ImageBackground
+          style={{width: 100, height: 100}}
+          source={require("./Resources/background.png")} style={ styles.image} />
       </View>
     );
   }
@@ -154,7 +162,7 @@ const styles = StyleSheet.create( {
   },
 
   buttonStyle: {
-    padding:10,
+    padding:5,
     width: 50,
     height: 50,
     backgroundColor: '#202646',
@@ -165,7 +173,14 @@ const styles = StyleSheet.create( {
     },
   
   scrollViewStyle: {
-    flex: 1,
+    bottom: 0,
+    position: 'absolute',
     width: "100%",
-  }
+  },
+
+  image: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
 })
