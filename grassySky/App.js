@@ -32,11 +32,16 @@ export default class HelloWorldApp extends Component {
           text="N"
           onPress={() => {
             this.setState({displayText:"You head North."})
-            grid[ currentX ][ currentY ] = 1;
-            if( currentY < 100 )
+            
+            if( currentY < 99  ) {
+              grid[ currentX ][ currentY ] = 1;
               currentY++;
-            else
+            }
+            else {
               this.setState({ displayText:"There is no path this way, you turn around." })
+            }
+            alert("here postion x: " + currentX + " postion y: " + currentY);
+
           }}
         />
         
@@ -44,6 +49,15 @@ export default class HelloWorldApp extends Component {
           text="S"
           onPress={() => {
             this.setState({displayText:"You head South.You notice a strange aperation on the horizon. You stop, and wonder if it's safe to continue down this path."})
+            if( currentY > 0 ) {
+              grid[ currentX ][ currentY ] = 1;
+              currentY--;
+            }
+            else {
+              this.setState({ displayText:"There is no path this way, you turn around." })
+            }
+            alert("postion x: " + currentX + " postion y: " + currentY);
+
           }}
         />
 
@@ -51,6 +65,16 @@ export default class HelloWorldApp extends Component {
           text="E"
           onPress={() => {
             this.setState({displayText:"You head East."})
+            if( currentX < 99 ) {
+              grid[ currentX ][ currentY ] = 1;
+              currentX++;
+            }
+            else {
+              this.setState({ displayText:"There is no path this way, you turn around." })
+
+            }
+            alert("postion x: " + currentX + " postion y: " + currentY);
+
           }}
         />
 
@@ -58,8 +82,18 @@ export default class HelloWorldApp extends Component {
           text="W"
           onPress={() => {
             this.setState({displayText:"You head West."})
-          }}
+            if( currentX > 0 ) {
+              grid[ currentX ][ currentY ] = 1;
+              currentX--;
+            }
+            else{
+              this.setState({ displayText:"There is no path this way, you turn around." })
+            }
+            alert("postion x: " + currentX + " postion y: " + currentY);
+          }
+        }
         />
+        
         <ScrollView style={styles.scrollViewStyle} >
           <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
         </ScrollView>
@@ -102,10 +136,11 @@ const styles = StyleSheet.create( {
 
   textStyle: {
     fontSize:20,
+    flex: 1,
     color: 'lightgray',
     alignItems: 'center',
-    justifyContent: 'center',
     textAlign: 'center',
+    justifyContent: 'flex-end',
   },
   
   displayStyle: {
@@ -126,6 +161,7 @@ const styles = StyleSheet.create( {
     borderRadius:5,
     borderWidth: 5,
     margin: 5,
+    justifyContent: "flex-end",
     },
   
   scrollViewStyle: {
