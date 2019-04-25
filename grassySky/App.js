@@ -21,19 +21,28 @@ export default class HelloWorldApp extends Component {
   
   constructor( props ){
     super( props );
+
     this.state={
       displayText: 'Hello Traveller',
+      active: true,
     }
   }
+  
   render() {
+    var icon = this.props.active
+    ? require('./Resources/background.png')
+    : require('./Resources/mangrove.png');
     return (
+
       <View style={{ flex: 1, alignItems: "flex-end" }}>
         <ImageBackground
-          source={require("./Resources/background.png")} style={ styles.image}>
+          source={icon} style={ styles.image}>
+          
           <CustomButton 
           text="N"
           onPress={() => {
             this.setState({displayText:"You head North."})
+            this.setState.active = true;
             
             if( currentY < 99  ) {
               grid[ currentX ][ currentY ] = 1;
@@ -49,6 +58,8 @@ export default class HelloWorldApp extends Component {
           text="S"
           onPress={() => {
             this.setState({displayText:"You head South."})
+            this.props.active = false;
+
             if( currentY > 0 ) {
               grid[ currentX ][ currentY ] = 1;
               currentY--;
