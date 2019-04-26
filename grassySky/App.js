@@ -22,12 +22,27 @@ export default class HelloWorldApp extends Component {
   constructor( props ){
     super( props );
 
+    this.backgroundChanger = this.swamp.bind( this );
+    this.backgroundChanger = this.home.bind( this );
+
     this.state={
       displayText: 'Hello Traveller',
-      active: true,
+      backgroundSource: require("./Resources/background.png")
     }
   }
   
+  swamp() {
+    this.setState({ 
+      backgroundSource: require("./Resources/mangrove.png")
+    });
+  }
+
+  home() {
+    this.setState({
+      backgroundSource: require("./Resources/background.png")
+    })
+  }
+
   render() {
     var icon = this.props.active
     ? require('./Resources/background.png')
@@ -36,13 +51,13 @@ export default class HelloWorldApp extends Component {
 
       <View style={{ flex: 1, alignItems: "flex-end" }}>
         <ImageBackground
-          source={icon} style={ styles.image}>
+          source={this.state.backgroundSource} style={ styles.image}>
           
           <CustomButton 
           text="N"
           onPress={() => {
+            this.swamp();
             this.setState({displayText:"You head North."})
-            this.setState.active = true;
             
             if( currentY < 99  ) {
               grid[ currentX ][ currentY ] = 1;
@@ -58,7 +73,7 @@ export default class HelloWorldApp extends Component {
           text="S"
           onPress={() => {
             this.setState({displayText:"You head South."})
-            this.props.active = false;
+            this.home()
 
             if( currentY > 0 ) {
               grid[ currentX ][ currentY ] = 1;
@@ -74,6 +89,7 @@ export default class HelloWorldApp extends Component {
           text="E"
           onPress={() => {
             this.setState({displayText:"You head East."})
+
             if( currentX < 99 ) {
               grid[ currentX ][ currentY ] = 1;
               currentX++;
@@ -104,18 +120,6 @@ export default class HelloWorldApp extends Component {
           <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
         </ScrollView>
         </ImageBackground>
-      </View>
-    );
-  }
-}
-
-class BackgroundImage extends Component {
-  render() {
-    return (
-      <View>
-        <ImageBackground
-          style={{width: 100, height: 100}}
-          source={require("./Resources/background.png")} style={ styles.image} />
       </View>
     );
   }
