@@ -3,16 +3,23 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { StyleSheet} from 'react-native';
 import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import Level from "./Levelz/level_one";
 
-var grid=new Array(100)
+var grid = new Array(100)
 
-for ( var i = 0; i < 100; i++) {
-  grid[i]=new Array(100);
-  for ( var j = 0; j < 100; j++ ) {
-    grid[ i ][ j ] = 0;
+var x_limit = 99;
+var y_limit = 99;
+
+function autofill() {
+  for ( var i = 0; i < 100; i++) {
+    grid[i]=new Array(100);
+    for ( var j = 0; j < 100; j++ ) {
+      grid[ i ][ j ] = 0;
+    }
   }
 }
 
+autofill();
 var currentX = 0;
 var currentY = 0;
 
@@ -58,7 +65,7 @@ export default class HelloWorldApp extends Component {
             this.swamp();
             this.setState({displayText:"You head North."})
             
-            if( currentY < 99  ) {
+            if( currentY < y_limit  ) {
               grid[ currentX ][ currentY ] = 1;
               currentY++;
             }
@@ -89,7 +96,7 @@ export default class HelloWorldApp extends Component {
           onPress={() => {
             this.setState({displayText:"You head East."})
 
-            if( currentX < 99 ) {
+            if( currentX < x_limit ) {
               grid[ currentX ][ currentY ] = 1;
               currentX++;
             }
