@@ -6,28 +6,55 @@ import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 import Level from "./Levelz/level_one";
 
 var grid = new Array(100)
-
-var x_limit = 99;
-var y_limit = 99;
+var maze = [
+           [  0,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
+         , [ -1,  0, -1, -1 , -1, -1,  2, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
+         , [ -1,  0, -1, -1 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
+         , [ -1,  0,  0,  0 ,  0,  0,  0,  0,  2 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 ]
+         , [ -1, -1, -1, -1 , -1, -1,  0, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 ]
+         , [ -1, -1, -1, -1 , -1, -1,  0, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [ -1, -1, -1, -1 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [ -1, -1, -1, -1 , -1, -1,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [ -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [ -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [  0,  0,  0,  0 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [  0, -1, -1,  0 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [  0, -1, -1,  0 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0,  0,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [  0, -1, -1,  0 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 ]
+         , [  0, -1, -1,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 ]
+         , [  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
+         , [  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
+         , [  0,  0,  0,  0 ,  0,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [ -1, -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1,  0 ]
+         , [ -1, -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1,  0 ]
+         , [ -1, -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 ,  0,  0,  0,  0,  0 ]
+         , [ -1, -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
+         , [ -1, -1, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
+         , [ -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
+         , [ -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
+         , [ -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ,  0,  0,  0,  0,  0 ] ];
+  
+var row_limit = 24;
+var col_limit = 24;
 
 function autofill() {
   for ( var i = 0; i < 100; i++) {
-    grid[i]=new Array(100);
+    grid[i]=new Array( 100 );
     for ( var j = 0; j < 100; j++ ) {
-      grid[ i ][ j ] = 0;
+       grid[ i ][ j ] = 0;
     }
   }
 }
 
 autofill();
-var currentX = 0;
-var currentY = 0;
+var currentRow = 0;
+var currentCol = 0;
 
 export default class HelloWorldApp extends Component {
   
   constructor( props ){
     super( props );
-
+    
     this.backgroundChanger = this.swamp.bind( this );
     this.backgroundChanger = this.home.bind( this );
 
@@ -50,43 +77,43 @@ export default class HelloWorldApp extends Component {
   }
 
   render() {
-    var icon = this.props.active
-    ? require('./Resources/background.png')
-    : require('./Resources/mangrove.png');
     return (
 
       <View style={{ flex: 1, alignItems: "flex-end" }}>
         <ImageBackground
           source={this.state.backgroundSource} style={ styles.image}>
           
+          
           <CustomButton 
-          text="N"
-          onPress={() => {
-            this.swamp();
-            this.setState({displayText:"You head North."})
-            
-            if( currentY < y_limit  ) {
-              grid[ currentX ][ currentY ] = 1;
-              currentY++;
-            }
-            else {
-              this.setState({ displayText:"There is no path this way, you turn around." })
-            }
-          }}
-        />
-        
-        <CustomButton 
+            text="N"
+            onPress={() => {
+              this.home()
+              if( currentRow > 0 ) {
+                if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
+                  currentRow--;
+                  this.setState({displayText:"You head North." + " row:" + currentRow + " col:" + currentCol })
+                } else {
+                  this.setState({ displayText: "You hit a wall" + " row:" + currentRow + " col:" + currentCol  }); 
+                }
+              } else {
+                this.setState({ displayText:"There is no path this way, you turn around." + " row:" + currentRow + " col:" + currentCol })
+              }
+            }}
+          />
+
+          <CustomButton 
           text="S"
           onPress={() => {
-            this.setState({displayText:"You head South."})
-            this.home()
-
-            if( currentY > 0 ) {
-              grid[ currentX ][ currentY ] = 1;
-              currentY--;
-            }
-            else {
-              this.setState({ displayText:"There is no path this way, you turn around." })
+            this.swamp();
+            if( currentRow < row_limit ) {
+              if( maze[ currentRow + 1 ][ currentCol ] !== -1 ) {
+                currentRow++;
+                this.setState({displayText:"You head South." + " row:" + currentRow + " col:" + currentCol })
+              } else {
+                this.setState({ displayText: "You hit a wall" + " row:" + currentRow + " col:" + currentCol }); 
+              }
+            } else {
+              this.setState({ displayText:"There is no path this way, you turn around." + " row:" + currentRow + " col:" + currentCol })
             }
           }}
         />
@@ -94,14 +121,16 @@ export default class HelloWorldApp extends Component {
         <CustomButton 
           text="E"
           onPress={() => {
-            this.setState({displayText:"You head East."})
 
-            if( currentX < x_limit ) {
-              grid[ currentX ][ currentY ] = 1;
-              currentX++;
-            }
-            else {
-              this.setState({ displayText:"There is no path this way, you turn around." })
+            if( currentCol < col_limit ) {
+              if( maze[ currentRow ][ currentCol + 1 ] !== -1 ) {
+                currentCol++;
+                this.setState({displayText:"You head East."  + " row:" + currentRow + " col:" + currentCol })
+              } else {
+                this.setState({ displayText: "You hit a wall"  + " row:" + currentRow + " col:" + currentCol }); 
+              }
+            } else {
+              this.setState({ displayText:"There is no path this way, you turn around."  + " row:" + currentRow + " col:" + currentCol })
 
             }
           }}
@@ -110,13 +139,16 @@ export default class HelloWorldApp extends Component {
         <CustomButton 
           text="W"
           onPress={() => {
-            this.setState({displayText:"You head West."})
-            if( currentX > 0 ) {
-              grid[ currentX ][ currentY ] = 1;
-              currentX--;
-            }
-            else{
-              this.setState({ displayText:"There is no path this way, you turn around." })
+
+            if( currentCol > 0 ) {
+              if( maze[ currentRow ][ currentCol - 1 ] !== -1 ) {
+                currentCol--;
+                this.setState({displayText:"You head West."  + " row:" + currentRow + " col:" + currentCol })
+              } else {
+                this.setState({ displayText: "You hit a wall"  + " row:" + currentRow + " col:" + currentCol }); 
+              }
+            } else {
+              this.setState({ displayText:"There is no path this way, you turn around." + " row:" + currentRow + " col:" + currentCol })
             }
           }
         }
