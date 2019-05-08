@@ -7,9 +7,9 @@ import Level from "./Levelz/level_one";
 
 var grid = new Array(100)
 var maze = [
-           [  0,  0, -1,  0 , -1, -1,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1, -1,  0 ,  0,  0,  0,  0,  0 ]
+           [  0, -9, -1,  0 , -1, -1,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1, -1,  0 ,  0,  0,  0,  0,  0 ]
          , [ -1,  0,  0,  0 ,  0,  0,  0, -1, -1 , -1, -1, -1,  0, -1 , -1,  0,  0,  0,  0 , -1, -1, -1, -1,  0 ]
-         , [ -1,  0, -1, -1 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1,  0 ]
+         , [ -1,  0, -1, -1 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
          , [  0,  0,  0,  0 ,  0,  0,  0,  0,  2 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 ]
          , [  0, -1, -1,  0 , -1, -1,  0, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 ]
          , [  0, -1, -1,  0 , -1, -1,  0, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 , -1, -1, -1,  0, -1 ]
@@ -49,6 +49,7 @@ function autofill() {
 autofill();
 var currentRow = 0;
 var currentCol = 0;
+var startingLives = 3;
 
 export default class HelloWorldApp extends Component {
   
@@ -57,10 +58,12 @@ export default class HelloWorldApp extends Component {
     
     this.backgroundChanger = this.swamp.bind( this );
     this.backgroundChanger = this.home.bind( this );
+    this.lives = this.die.bind( this );
 
     this.state={
       displayText: 'Hello Traveller',
-      backgroundSource: require("./Resources/background.png")
+      backgroundSource: require("./Resources/background.png"),
+      lives: startingLives
     }
   }
   
@@ -73,7 +76,14 @@ export default class HelloWorldApp extends Component {
   home() {
     this.setState({
       backgroundSource: require("./Resources/background.png")
-    })
+    });
+  }
+
+  die() {
+    
+    this.setState({
+      lives: this.state.lives - 1
+    });
   }
 
   render() {
@@ -82,6 +92,8 @@ export default class HelloWorldApp extends Component {
       <View style={{ flex: 1, alignItems: "flex-end" }}>
         <ImageBackground
           source={this.state.backgroundSource} style={ styles.image}>
+
+          <Text>{this.state.lives}</Text>
           
           
           <CustomButton 
@@ -125,6 +137,9 @@ export default class HelloWorldApp extends Component {
             if( currentCol < col_limit ) {
               if( maze[ currentRow ][ currentCol + 1 ] !== -1 ) {
                 currentCol++;
+                if( maze[ currentRow ][ currentCol ] === -9 ) {
+                  this.die();
+                }
                 this.setState({displayText:"You head East."  + " row:" + currentRow + " col:" + currentCol })
               } else {
                 this.setState({ displayText: "You hit a wall"  + " row:" + currentRow + " col:" + currentCol }); 
