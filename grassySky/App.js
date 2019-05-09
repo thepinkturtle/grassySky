@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { StyleSheet} from 'react-native';
 import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
-import Level from "./Levelz/level_one";
 
 var grid = new Array(100)
 var maze = [
