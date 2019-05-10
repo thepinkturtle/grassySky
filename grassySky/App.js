@@ -79,9 +79,12 @@ export default class HelloWorldApp extends Component {
   }
 
   die() {
-    
-    this.setState({
-      lives: this.state.lives - 1
+    this.setState( function() {
+      if( this.state.lives === 0 ) {
+        return {lives: 0 }
+      } else {
+        return { lives: this.state.lives - 1 }
+      }
     });
   }
 
@@ -91,8 +94,8 @@ export default class HelloWorldApp extends Component {
       <View style={{ flex: 1, alignItems: "flex-end" }}>
         <ImageBackground
           source={this.state.backgroundSource} style={ styles.image}>
-
           <Text>{this.state.lives}</Text>
+          
           
           
           <CustomButton 
