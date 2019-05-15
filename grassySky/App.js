@@ -9,11 +9,11 @@ var maze = [
            [  0,    0, -1,  0 , -1, -1,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1, -1,  0 ,  0,  0,  0,  0,  0 ]
          , [ -1,    0,  0,  0 ,  0,  0,  0, -1, -1 , -1, -1, -1,  0, -1 , -1,  0,  0,  0,  0 , -1, -1, -1, -1,  0 ]
          , [ -1,    0, -1, -1 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
-         , [ -9.1,  0,  0,  0 ,  0,  0,  0,  0,  2 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 ]
-         , [ -9.2, -1, -1,  0 , -1, -1,  0, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 ]
-         , [ -9.3, -1, -1,  0 , -1, -1,  0, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 , -1, -1, -1,  0, -1 ]
-         , [ -9.4,  0, -1,  0 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 , -1, -1, -1,  0, -1 ]
-         , [ -9.5,  0, -1,  0 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [ 'm3',  0,  0,  0 ,  0,  0,  0,  0,  2 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 ]
+         , [ 'm2', -1, -1,  0 , -1, -1,  0, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 ]
+         , [ 'm1', -1, -1,  0 , -1, -1,  0, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [ 'm0',  0, -1,  0 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [ 'dead',  0, -1,  0 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
          , [ -1,    0,  0,  0 , -1,  0, -1, -1,  0 , -1, -1, -1, -1,  0 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
          , [ -1,   -1, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0, -1,  0 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
          , [  0,    0,  0,  0 , -1,  0, -1, -1, -1 ,  0, -1,  0,  0,  0 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
@@ -33,7 +33,7 @@ var maze = [
          , [ -1,   -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
          , [ -1,   -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ,  0,  0,  0,  0,  0 ] ];
 
-         var row_limit = 24;
+var row_limit = 24;
 var col_limit = 24;
 var currentRow = 0;
 var currentCol = 0;
@@ -81,10 +81,8 @@ export default class HelloWorldApp extends Component {
 
   die() {
     this.setState( function() {
-      if( this.state.lives === 0 ) {
-        return {lives: 0 }
-      } else {
-        return { lives: this.state.lives - 1 }
+      if( maze[ currentRow ][ currentCol ] === 'dead' ) {
+        return { lives: this.state.lives - 1 };
       }
     });
   }
@@ -107,12 +105,14 @@ export default class HelloWorldApp extends Component {
                 if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
                   currentRow--;
                   this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol });
+                  
                 } else {
                   this.setState({ displayText: story_map.get ( maze[ currentRow ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol  }); 
                 }
               } else {
                 this.setState({ displayText: "There is no path this way, you turn back." });
               }
+              this.die();
             }}
           />
 
@@ -130,6 +130,7 @@ export default class HelloWorldApp extends Component {
             } else {
               this.setState({ displayText:"There is no path this way, you turn around." + " row:" + currentRow + " col:" + currentCol });
             }
+            this.die();
           }}
         />
 
@@ -146,8 +147,8 @@ export default class HelloWorldApp extends Component {
               }
             } else {
               this.setState({ displayText:"There is no path this way, you turn around."  + " row:" + currentRow + " col:" + currentCol })
-
             }
+            this.die();
           }}
         />
 
@@ -165,6 +166,7 @@ export default class HelloWorldApp extends Component {
             } else {
               this.setState({ displayText:"There is no path this way, you turn around." + " row:" + currentRow + " col:" + currentCol })
             }
+            this.die();
           }
         }
         />
