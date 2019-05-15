@@ -83,6 +83,9 @@ export default class HelloWorldApp extends Component {
     this.setState( function() {
       if( maze[ currentRow ][ currentCol ] === 'dead' ) {
         return { lives: this.state.lives - 1 };
+      } 
+      else if ( this.state.lives === 0 ){
+        return { lives: 0 };
       }
     });
   }
@@ -104,10 +107,10 @@ export default class HelloWorldApp extends Component {
               if( currentRow > 0 ) {
                 if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
                   currentRow--;
-                  this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol });
+                  this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") });
                   
                 } else {
-                  this.setState({ displayText: story_map.get ( maze[ currentRow ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol  }); 
+                  this.setState({ displayText: story_map.get ( maze[ currentRow ][ currentCol ] + "") }); 
                 }
               } else {
                 this.setState({ displayText: "There is no path this way, you turn back." });
@@ -123,12 +126,12 @@ export default class HelloWorldApp extends Component {
             if( currentRow < row_limit ) {
               if( maze[ currentRow + 1 ][ currentCol ] !== -1 ) {
                 currentRow++;
-                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol  });
+                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") });
               } else {
-                this.setState({displayText: story_map.get( maze[ currentRow + 1 ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol  });
+                this.setState({displayText: story_map.get( maze[ currentRow + 1 ][ currentCol ] + "") });
               }
             } else {
-              this.setState({ displayText:"There is no path this way, you turn around." + " row:" + currentRow + " col:" + currentCol });
+              this.setState({ displayText:"There is no path this way, you turn around." });
             }
             this.die();
           }}
@@ -141,12 +144,12 @@ export default class HelloWorldApp extends Component {
             if( currentCol < col_limit ) {
               if( maze[ currentRow ][ currentCol + 1 ] !== -1 ) {
                 currentCol++;
-                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "")  + " row:" + currentRow + " col:" + currentCol   })
+                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") })
               } else {
-                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol + 1 ] + "") + " row:" + currentRow + " col:" + currentCol  })              
+                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol + 1 ] + "") })              
               }
             } else {
-              this.setState({ displayText:"There is no path this way, you turn around."  + " row:" + currentRow + " col:" + currentCol })
+              this.setState({ displayText:"There is no path this way, you turn around."  })
             }
             this.die();
           }}
@@ -159,12 +162,12 @@ export default class HelloWorldApp extends Component {
             if( currentCol > 0 ) {
               if( maze[ currentRow ][ currentCol - 1 ] !== -1 ) {
                 currentCol--;
-                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol  })
+                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") })
               } else {
-                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol - 1 ] + "") + " row:" + currentRow + " col:" + currentCol  })
+                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol - 1 ] + "") })
               }
             } else {
-              this.setState({ displayText:"There is no path this way, you turn around." + " row:" + currentRow + " col:" + currentCol })
+              this.setState({ displayText:"There is no path this way, you turn around." })
             }
             this.die();
           }
