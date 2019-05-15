@@ -6,7 +6,7 @@ import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 
 
 var maze = [
-           [  0,   -9, -1,  0 , -1, -1,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1, -1,  0 ,  0,  0,  0,  0,  0 ]
+           [  0,    0, -1,  0 , -1, -1,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1, -1,  0 ,  0,  0,  0,  0,  0 ]
          , [ -1,    0,  0,  0 ,  0,  0,  0, -1, -1 , -1, -1, -1,  0, -1 , -1,  0,  0,  0,  0 , -1, -1, -1, -1,  0 ]
          , [ -1,    0, -1, -1 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
          , [ -9.1,  0,  0,  0 ,  0,  0,  0,  0,  2 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 ]
@@ -40,7 +40,7 @@ var currentCol = 0;
 var startingLives = 3;
 
 let story_map = new Map([['0' , "You head down the path."]
-                , [ '-1' , "There is no path this way." ]
+                , [ '-1' , "You encounter an unmovable rock, you turn back." ]
                 , [ 'm3' , "You hear a sound." ]
                 , [ 'm2' , "A larger shadow darts across the path." ]
                 , [ 'm1' , "You feel off, as though something evil is staring at you." ]
@@ -106,13 +106,12 @@ export default class HelloWorldApp extends Component {
               if( currentRow > 0 ) {
                 if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
                   currentRow--;
-                  // this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ]) })
+                  this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol });
                 } else {
-                  this.setState({ displayText: "You hit a wall" + " row:" + currentRow + " col:" + currentCol  }); 
+                  this.setState({ displayText: story_map.get ( maze[ currentRow ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol  }); 
                 }
               } else {
-                alert( "the map value is: " + story_map.get( 0 ) )
-                // this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] ) })
+                this.setState({ displayText: "There is no path this way, you turn back." });
               }
             }}
           />
@@ -124,12 +123,12 @@ export default class HelloWorldApp extends Component {
             if( currentRow < row_limit ) {
               if( maze[ currentRow + 1 ][ currentCol ] !== -1 ) {
                 currentRow++;
-                this.setState({displayText:"You head South." + " row:" + currentRow + " col:" + currentCol })
+                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol  });
               } else {
-                this.setState({ displayText: "You hit a wall" + " row:" + currentRow + " col:" + currentCol }); 
+                this.setState({displayText: story_map.get( maze[ currentRow + 1 ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol  });
               }
             } else {
-              this.setState({ displayText:"There is no path this way, you turn around." + " row:" + currentRow + " col:" + currentCol })
+              this.setState({ displayText:"There is no path this way, you turn around." + " row:" + currentRow + " col:" + currentCol });
             }
           }}
         />
@@ -141,12 +140,9 @@ export default class HelloWorldApp extends Component {
             if( currentCol < col_limit ) {
               if( maze[ currentRow ][ currentCol + 1 ] !== -1 ) {
                 currentCol++;
-                if( maze[ currentRow ][ currentCol ] === -9 ) {
-                  this.die();
-                }
-                this.setState({displayText:"You head East."  + " row:" + currentRow + " col:" + currentCol })
+                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "")  + " row:" + currentRow + " col:" + currentCol   })
               } else {
-                this.setState({ displayText: "You hit a wall"  + " row:" + currentRow + " col:" + currentCol }); 
+                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol + 1 ] + "") + " row:" + currentRow + " col:" + currentCol  })              
               }
             } else {
               this.setState({ displayText:"There is no path this way, you turn around."  + " row:" + currentRow + " col:" + currentCol })
@@ -162,9 +158,9 @@ export default class HelloWorldApp extends Component {
             if( currentCol > 0 ) {
               if( maze[ currentRow ][ currentCol - 1 ] !== -1 ) {
                 currentCol--;
-                this.setState({displayText:"You head West."  + " row:" + currentRow + " col:" + currentCol })
+                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") + " row:" + currentRow + " col:" + currentCol  })
               } else {
-                this.setState({ displayText: "You hit a wall"  + " row:" + currentRow + " col:" + currentCol }); 
+                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol - 1 ] + "") + " row:" + currentRow + " col:" + currentCol  })
               }
             } else {
               this.setState({ displayText:"There is no path this way, you turn around." + " row:" + currentRow + " col:" + currentCol })
