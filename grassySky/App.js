@@ -39,17 +39,17 @@ var currentRow = 0;
 var currentCol = 0;
 var startingLives = 3;
 
-var story_map = { '0' : "You head down the path." 
-                , '-1' : "There is no path this way."
-                , "m3" : "You hear a sound."
-                , "m2" : "A larger shadow darts across the path."
-                , "m1" : "You feel off, as though something evil is staring at you." 
-                , "m0" : "A large hairy beast with blood red eyes " + 
+let story_map = new Map([['0' , "You head down the path."]
+                , [ '-1' , "There is no path this way." ]
+                , [ 'm3' , "You hear a sound." ]
+                , [ 'm2' , "A larger shadow darts across the path." ]
+                , [ 'm1' , "You feel off, as though something evil is staring at you." ]
+                , [ 'm0' , "A large hairy beast with blood red eyes " + 
                          ", mangled sharp teeth and the stench of rotten flesh looms " + 
                          "over you, you immediately regret your decision to go this way. " + 
-                         "Too late, its mouth opens wide and it lurches toward you..." 
-                         
-                , "dead" : "You died..." };
+                         "Too late, its mouth opens wide and it lurches toward you..." ]
+
+                , [ 'dead' , "You died..." ] ]);
 
 export default class HelloWorldApp extends Component {
   
@@ -106,12 +106,13 @@ export default class HelloWorldApp extends Component {
               if( currentRow > 0 ) {
                 if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
                   currentRow--;
-                  this.setState({displayText:"You head North." + " row:" + currentRow + " col:" + currentCol })
+                  // this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ]) })
                 } else {
                   this.setState({ displayText: "You hit a wall" + " row:" + currentRow + " col:" + currentCol  }); 
                 }
               } else {
-                this.setState({ displayText:"There is no path this way, you turn around." + " row:" + currentRow + " col:" + currentCol })
+                alert( "the map value is: " + story_map.get( 0 ) )
+                // this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] ) })
               }
             }}
           />
