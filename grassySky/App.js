@@ -82,6 +82,8 @@ export default class HelloWorldApp extends Component {
   die() {
     this.setState( function() {
       if( maze[ currentRow ][ currentCol ] === 'dead' ) {
+        currentRow = 0;
+        currentCol = 0;
         return { lives: this.state.lives - 1 };
       } 
       else if ( this.state.lives === 0 ){
