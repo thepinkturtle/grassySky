@@ -80,7 +80,7 @@ export default class HelloWorldApp extends Component {
   }
 
   die() {
-    this.setState( function() {
+    this.setState( () => {
       if( maze[ currentRow ][ currentCol ] === 'dead' ) {
         currentRow = 0;
         currentCol = 0;
@@ -89,7 +89,7 @@ export default class HelloWorldApp extends Component {
       else if ( this.state.lives === 0 ){
         return { lives: 0 };
       }
-    });
+    }, () =>  { if( currentRow === 0 && currentCol === 0) { this.home() } } );
   }
 
   render() {
