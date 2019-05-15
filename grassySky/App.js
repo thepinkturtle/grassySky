@@ -4,7 +4,6 @@ import { Text, View } from 'react-native';
 import { StyleSheet} from 'react-native';
 import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 
-var grid = new Array(100)
 var maze = [
            [  0, -9, -1,  0 , -1, -1,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1, -1,  0 ,  0,  0,  0,  0,  0 ]
          , [ -1,  0,  0,  0 ,  0,  0,  0, -1, -1 , -1, -1, -1,  0, -1 , -1,  0,  0,  0,  0 , -1, -1, -1, -1,  0 ]
@@ -35,17 +34,6 @@ var maze = [
   
 var row_limit = 24;
 var col_limit = 24;
-
-function autofill() {
-  for ( var i = 0; i < 100; i++) {
-    grid[i]=new Array( 100 );
-    for ( var j = 0; j < 100; j++ ) {
-       grid[ i ][ j ] = 0;
-    }
-  }
-}
-
-autofill();
 var currentRow = 0;
 var currentCol = 0;
 var startingLives = 3;
