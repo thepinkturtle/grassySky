@@ -59,13 +59,15 @@ export default class HelloWorldApp extends Component {
     this.backgroundChanger = this.swamp.bind( this );
     this.backgroundChanger = this.home.bind( this );
     this.lives = this.die.bind( this );
-    this._customButton = React.createRef();
-
     this.state={
       displayText: 'Hello Traveller',
       backgroundSource: require("./Resources/background.png"),
       lives: startingLives
     }
+  }
+
+  trigger_customButton_disable() {
+    this.refs.customButton.disable_button();
   }
 
   swamp() {
@@ -102,7 +104,7 @@ export default class HelloWorldApp extends Component {
           <Text>{this.state.lives}</Text>
           
           <CustomButton 
-            ref = { this._customButton }
+            ref = "customButtom"
             text="N"
             onPress={() => {
               this.home()
@@ -119,6 +121,7 @@ export default class HelloWorldApp extends Component {
               }
               this._customButton.current.disableButton();
               this.die();
+	      this.trigger_customButton_disable;
             }}
           />
 
