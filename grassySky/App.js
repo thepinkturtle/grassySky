@@ -59,6 +59,7 @@ export default class HelloWorldApp extends Component {
     this.backgroundChanger = this.swamp.bind( this );
     this.backgroundChanger = this.home.bind( this );
     this.lives = this.die.bind( this );
+    this._customButton = React.createRef();
 
     this.state={
       displayText: 'Hello Traveller',
@@ -66,7 +67,7 @@ export default class HelloWorldApp extends Component {
       lives: startingLives
     }
   }
-  
+
   swamp() {
     this.setState({ 
       backgroundSource: require("./Resources/mangrove.png")
@@ -100,9 +101,8 @@ export default class HelloWorldApp extends Component {
           source={this.state.backgroundSource} style={ styles.image}>
           <Text>{this.state.lives}</Text>
           
-          
-          
           <CustomButton 
+            ref = { this._customButton }
             text="N"
             onPress={() => {
               this.home()
@@ -117,6 +117,7 @@ export default class HelloWorldApp extends Component {
               } else {
                 this.setState({ displayText: "There is no path this way, you turn back." });
               }
+              this._customButton.current.disableButton();
               this.die();
             }}
           />
@@ -135,8 +136,8 @@ export default class HelloWorldApp extends Component {
             } else {
               this.setState({ displayText:"There is no path this way, you turn around." });
             }
-            this.die();
           }}
+          
         />
 
         <CustomButton 
@@ -186,12 +187,23 @@ export default class HelloWorldApp extends Component {
 }
 
 class CustomButton extends Component {
+
+  disable_button() {
+    this.setState( () => {
+        if( story_map.get( maze[ currentRow ][ currentCol ] + "" ) === '0') {
+          return { disabled: true };
+        } else {
+          return { disabled: false };
+        }
+      }
+    );
+  }
 	render() {
-		const { text, onPress} = this.props;
+		const { text, onPress } = this.props;
 		return (
 		  <TouchableOpacity style={styles.buttonStyle}
-			onPress={() => onPress()}
-		  >
+      onPress={() => onPress()}
+      >
 			 <Text style={styles.textStyle}>{text}</Text>
 		  </TouchableOpacity>
 		);
