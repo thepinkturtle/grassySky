@@ -6,32 +6,32 @@ import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 
 
 var maze = [
-           [  0,    0, -1,  0 , -1, -1,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1, -1,  0 ,  0,  0,  0,  0,  0 ]
-         , [ -1,    0,  0,  0 ,  0,  0,  0, -1, -1 , -1, -1, -1,  0, -1 , -1,  0,  0,  0,  0 , -1, -1, -1, -1,  0 ]
-         , [ -1,    0, -1, -1 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
-         , [ 'm3',  0,  0,  0 ,  0,  0,  0,  0,  2 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 ]
-         , [ 'm2', -1, -1,  0 , -1, -1,  0, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 ]
-         , [ 'm1', -1, -1,  0 , -1, -1,  0, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 , -1, -1, -1,  0, -1 ]
-         , [ 'm0',  0, -1,  0 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 , -1, -1, -1,  0, -1 ]
-         , [ 'dead',  0, -1,  0 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
-         , [ -1,    0,  0,  0 , -1,  0, -1, -1,  0 , -1, -1, -1, -1,  0 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
-         , [ -1,   -1, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0, -1,  0 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
-         , [  0,    0,  0,  0 , -1,  0, -1, -1, -1 ,  0, -1,  0,  0,  0 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
-         , [  0,   -1, -1,  0 , -1,  0, -1,  0,  0 ,  0,  0,  0, -1,  0 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
-         , [  0,   -1, -1,  0 , -1,  0, -1,  0, -1 , -1, -1, -1, -1,  0 , -1,  0,  0,  0, -1 , -1, -1, -1,  0, -1 ]
-         , [  0,   -1, -1,  0 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 ]
-         , [  0,   -1, -1,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 ]
-         , [  0,   -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
-         , [  0,   -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
-         , [  0,    0,  0,  0 ,  0,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [ -1,   -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1,  0 ]
-         , [ -1,   -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1,  0 ]
-         , [ -1,   -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 ,  0,  0,  0,  0,  0 ]
-         , [ -1,   -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
-         , [ -1,   -1, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
-         , [ -1,   -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
-         , [ -1,   -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
-         , [ -1,   -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ,  0,  0,  0,  0,  0 ] ];
+           [  0,         0, -1,  0 , -1, -1,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1, -1,  0 ,  0,  0,  0,  0,  0 ]
+         , [ -1,         0,  0,  0 ,  0,  0,  0, -1, -1 , -1, -1, -1,  0, -1 , -1,  0,  0,  0,  0 , -1, -1, -1, -1,  0 ]
+         , [ -1,         0, -1, -1 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
+         , [ 'm3',       0,  0,  0 ,  0,  0,  0,  0,  2 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 ]
+         , [ 'm2',      -1, -1,  0 , -1, -1,  0, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 ]
+         , [ 'm1',      -1, -1,  0 , -1, -1,  0, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [ 'm0',       0, -1,  0 , -1, -1,  0, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [ 'agoroth',  0, -1,  0 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [ -1,         0,  0,  0 , -1,  0, -1, -1,  0 , -1, -1, -1, -1,  0 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [ -1,        -1, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0, -1,  0 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [  0,         0,  0,  0 , -1,  0, -1, -1, -1 ,  0, -1,  0,  0,  0 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [  0,        -1, -1,  0 , -1,  0, -1,  0,  0 ,  0,  0,  0, -1,  0 , -1,  0, -1,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [  0,        -1, -1,  0 , -1,  0, -1,  0, -1 , -1, -1, -1, -1,  0 , -1,  0,  0,  0, -1 , -1, -1, -1,  0, -1 ]
+         , [  0,        -1, -1,  0 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1,  0, -1 ]
+         , [  0,        -1, -1,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0, -1 ]
+         , [  0,        -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
+         , [  0,        -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ]
+         , [  0,         0,  0,  0 ,  0,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [ -1,        -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1,  0 ]
+         , [ -1,        -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1,  0 ]
+         , [ -1,        -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 ,  0,  0,  0,  0,  0 ]
+         , [ -1,        -1, -1, -1 , -1,  0, -1, -1, -1 , -1, -1, -1, -1, -1 , -1,  0, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
+         , [ -1,        -1, -1, -1 , -1,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
+         , [ -1,        -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
+         , [ -1,        -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ,  0, -1, -1, -1, -1 ]
+         , [ -1,        -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 , -1, -1, -1, -1, -1 ,  0,  0,  0,  0,  0 ] ];
 
 var row_limit = 24;
 var col_limit = 24;
@@ -42,14 +42,19 @@ var startingLives = 3;
 let story_map = new Map([['0' , "You head down the path."]
                 , [ '-1' , "You encounter an unmovable rock, you turn back." ]
                 , [ 'm3' , "You hear a sound." ]
-                , [ 'm2' , "A larger shadow darts across the path." ]
+                , [ 'm2' , "A large shadow darts across the path." ]
                 , [ 'm1' , "You feel off, as though something evil is staring at you." ]
                 , [ 'm0' , "A large hairy beast with blood red eyes " + 
                          ", mangled sharp teeth and the stench of rotten flesh looms " + 
                          "over you, you immediately regret your decision to go this way. " + 
                          "Too late, its mouth opens wide and it lurches toward you..." ]
 
-                , [ 'dead' , "You died..." ] ]);
+                , [ 'dead' , "You died..." ]
+                , [ 'agoroth', "My name is, Agoroth! I am the mighty demon of the black woods. You seem like a clever enough " +
+                  "fool. Hand to hand combat is only uncultered swine. I will make a deal with you. A battle of wits! If I win " +
+                  "I get to consume your soul and you will remain a prisoner to me, trapped in the dark diminsion, forever my slave. " +
+                  "If you win, I will let your spirit remain in that bag of flesh, and you may pass without further strife from me." ] 
+                ]);
 
 export default class HelloWorldApp extends Component {
   
@@ -99,7 +104,7 @@ export default class HelloWorldApp extends Component {
           source={this.state.backgroundSource} style={ styles.image}>
           <Text>{this.state.lives}</Text>
           
-          <CustomButton 
+          <NavButton 
             text="N"
             onPress={() => {
               this.home();
@@ -118,7 +123,7 @@ export default class HelloWorldApp extends Component {
             }}
           />
 
-          <CustomButton 
+          <NavButton 
           text="S"
           onPress={() => {
             this.swamp();
@@ -136,7 +141,7 @@ export default class HelloWorldApp extends Component {
           
         />
 
-        <CustomButton 
+        <NavButton 
           text="E"
           onPress={() => {
 
@@ -154,7 +159,7 @@ export default class HelloWorldApp extends Component {
           }}
         />
 
-        <CustomButton 
+        <NavButton 
           text="W"
           onPress={() => {
 
@@ -174,6 +179,16 @@ export default class HelloWorldApp extends Component {
         />
 
         <ScrollView style={styles.scrollViewStyle} >
+          <InteractButton text="Fight!"
+            onPress={() => {
+              if( maze[ currentRow + 1 ][ currentCol ] === 'agoroth' ) {
+                currentRow++;
+                this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] + "" ) })
+              }
+            }
+          }
+          />
+          <InteractButton text="Run!"/>
           <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
         </ScrollView>
         </ImageBackground>
@@ -182,25 +197,28 @@ export default class HelloWorldApp extends Component {
   }
 }
 
-class CustomButton extends Component {
-
-  // disable_button() {
-  //   this.setState( () => {
-  //     const maze[ currentRow ][ currentCol ] === 0 ) {
-  //       // alert("this happened again again" );
-  //       //   return { display = "none" };
-  //       // } else {
-  //       //   return { display = "flex" };
-  //       // }
-  //     }
-  //   );
-  // }
-
+class NavButton extends Component {
 	render() {
-    const display = ( maze[ currentRow ][ currentCol ] === 'm0' ? "none" : "flex" )
+    const display = ( maze[ currentRow ][ currentCol ] === 'm0' ? "none" : 
+                      maze[ currentRow ][ currentCol ] === 'agoroth' ? "none" :
+                    "flex" )
 		const { text, onPress } = this.props;
 		return (
 		  <TouchableOpacity style={[styles.buttonStyle, { display } ] }
+      onPress={() => onPress()}
+      >
+			 <Text style={styles.textStyle}>{text}</Text>
+		  </TouchableOpacity>
+		);
+	}
+}
+
+class InteractButton extends Component {
+	render() {
+    const display = ( maze[ currentRow ][ currentCol ] === 'm0' ? "flex" : "none" )
+		const { text, onPress } = this.props;
+		return (
+		  <TouchableOpacity style={[styles.interactButtonStyle, { display } ] }
       onPress={() => onPress()}
       >
 			 <Text style={styles.textStyle}>{text}</Text>
@@ -229,7 +247,7 @@ const styles = StyleSheet.create( {
   },
 
   textStyle: {
-    fontSize:20,
+    fontSize: 20,
     flex: 1,
     color: 'lightgray',
     alignItems: 'center',
@@ -238,7 +256,8 @@ const styles = StyleSheet.create( {
   },
   
   displayStyle: {
-    fontSize:20,
+    fontSize: 20,
+    width: '100%',
     backgroundColor: "lightgrey",
     color: 'gray',
     flex: 1,
@@ -258,7 +277,20 @@ const styles = StyleSheet.create( {
     justifyContent: "flex-end",
     },
   
+  interactButtonStyle: {
+    flex: 1,
+    padding:5,
+    width: 100,
+    height: 50,
+    backgroundColor: '#202646',
+    borderRadius:5,
+    borderWidth: 5,
+    margin: 5,
+    flexDirection: "row",
+    },
+    
   scrollViewStyle: {
+    flex: 1,
     bottom: 0,
     position: 'absolute',
     width: "100%",
