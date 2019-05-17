@@ -104,10 +104,11 @@ export default class HelloWorldApp extends Component {
           <Text>{this.state.lives}</Text>
           
           <CustomButton 
-            ref = "customButtom"
+            ref = "customButton"
             text="N"
             onPress={() => {
-              this.home()
+              this.trigger_customButton_disable();
+              this.home();
               if( currentRow > 0 ) {
                 if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
                   currentRow--;
@@ -119,9 +120,7 @@ export default class HelloWorldApp extends Component {
               } else {
                 this.setState({ displayText: "There is no path this way, you turn back." });
               }
-              this._customButton.current.disableButton();
               this.die();
-	      this.trigger_customButton_disable;
             }}
           />
 
@@ -193,18 +192,19 @@ class CustomButton extends Component {
 
   disable_button() {
     this.setState( () => {
-        if( story_map.get( maze[ currentRow ][ currentCol ] + "" ) === '0') {
-          return { disabled: true };
+      if( maze[ currentRow ][ currentCol ] === 0 ) {
+        alert("this happened again again" );
+          return { display: "none" };
         } else {
-          return { disabled: false };
+          return { display: "flex" };
         }
       }
     );
   }
 	render() {
-		const { text, onPress } = this.props;
+		const { text, onPress, display } = this.props;
 		return (
-		  <TouchableOpacity style={styles.buttonStyle}
+		  <TouchableOpacity style={[styles.buttonStyle, {display}]}
       onPress={() => onPress()}
       >
 			 <Text style={styles.textStyle}>{text}</Text>
