@@ -66,10 +66,6 @@ export default class HelloWorldApp extends Component {
     }
   }
 
-  trigger_customButton_disable() {
-    this.refs.customButton.disable_button();
-  }
-
   swamp() {
     this.setState({ 
       backgroundSource: require("./Resources/mangrove.png")
@@ -104,10 +100,8 @@ export default class HelloWorldApp extends Component {
           <Text>{this.state.lives}</Text>
           
           <CustomButton 
-            ref = "customButton"
             text="N"
             onPress={() => {
-              this.trigger_customButton_disable();
               this.home();
               if( currentRow > 0 ) {
                 if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
@@ -190,21 +184,23 @@ export default class HelloWorldApp extends Component {
 
 class CustomButton extends Component {
 
-  disable_button() {
-    this.setState( () => {
-      if( maze[ currentRow ][ currentCol ] === 0 ) {
-        alert("this happened again again" );
-          return { display: "none" };
-        } else {
-          return { display: "flex" };
-        }
-      }
-    );
-  }
+  // disable_button() {
+  //   this.setState( () => {
+  //     const maze[ currentRow ][ currentCol ] === 0 ) {
+  //       // alert("this happened again again" );
+  //       //   return { display = "none" };
+  //       // } else {
+  //       //   return { display = "flex" };
+  //       // }
+  //     }
+  //   );
+  // }
+
 	render() {
-		const { text, onPress, display } = this.props;
+    const display = ( maze[ currentRow ][ currentCol ] === 'm0' ? "none" : "flex" )
+		const { text, onPress } = this.props;
 		return (
-		  <TouchableOpacity style={[styles.buttonStyle, {display}]}
+		  <TouchableOpacity style={[styles.buttonStyle, { display } ] }
       onPress={() => onPress()}
       >
 			 <Text style={styles.textStyle}>{text}</Text>
