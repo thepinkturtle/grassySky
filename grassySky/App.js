@@ -38,7 +38,7 @@ var col_limit = 24;
 var currentRow = 0;
 var currentCol = 0;
 var startingLives = 3;
-var minor_boss = 0
+var minor_boss = .33
 
 let story_map = new Map([['0' , "You head down the path."]
                 , [ 'escape'  , "You escaped with your life in hand. You lucky dog, next time you might not be so lucky..."]
@@ -84,6 +84,12 @@ export default class HelloWorldApp extends Component {
     this.setState({
       backgroundSource: require("./Resources/background.png")
     });
+  }
+
+  agoroth() {
+    this.setState({
+      backgroundSource: require("./Resources/agoroth.png")
+    })
   }
 
   die() {
@@ -184,6 +190,7 @@ export default class HelloWorldApp extends Component {
         <ScrollView style={styles.scrollViewStyle} >
           <InteractButton text="Fight!"
             onPress={() => {
+              this.agoroth();
               currentRow++;
               if( maze[ currentRow ][ currentCol ] === 'agoroth' ) {
                 this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] + "" ) })
@@ -200,7 +207,8 @@ export default class HelloWorldApp extends Component {
                   // alert( "current position: " + currentRow + ',' + currentCol )
               }
               else{
-                this.setState({ displayText: story_map.get( 'caught' ) } )
+                this.agoroth();
+                this.setState({ displayText: story_map.get( 'caught' ) } );
               }
             }
           }/>
@@ -240,6 +248,12 @@ class InteractButton extends Component {
 		  </TouchableOpacity>
 		);
 	}
+}
+
+class Agoroth extends Component {
+  render(){
+
+  }
 }
 
 const styles = StyleSheet.create( {
