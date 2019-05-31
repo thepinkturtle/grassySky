@@ -38,6 +38,7 @@ var col_limit = 24;
 var currentRow = 0;
 var currentCol = 0;
 var startingLives = 3;
+var minor_boss = .33
 
 let story_map = new Map([['0' , "You head down the path."]
                 , [ '-1' , "You encounter an unmovable rock, you turn back." ]
@@ -54,6 +55,7 @@ let story_map = new Map([['0' , "You head down the path."]
                   "fool. Hand to hand combat is only uncultered swine. I will make a deal with you. A battle of wits! If I win " +
                   "I get to consume your soul and you will remain a prisoner to me, trapped in the dark diminsion, forever my slave. " +
                   "If you win, I will let your spirit remain in that bag of flesh, and you may pass without further strife from me." ] 
+                , [ 'caught', "Ha ha ha, nice try you delicous little morsel. You can't escape from me!"]
                 ]);
 
 export default class HelloWorldApp extends Component {
@@ -188,7 +190,18 @@ export default class HelloWorldApp extends Component {
             }
           }
           />
-          <InteractButton text="Run!"/>
+          <InteractButton text="Run!"
+          onPress={() => {
+              var odds = Math.random();
+              if( odds > minor_boss ){
+                  currentRow++;
+                  this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] + "" ) } )
+              }
+              else{
+                this.setState({ displayText: story_map.get( 'caught' ) } )
+              }
+            }
+          }/>
           <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
         </ScrollView>
         </ImageBackground>
