@@ -14,7 +14,7 @@ var maze = [
          , [ 'm1',      -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [ 'm0',      -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [ 'agoroth', -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  1,        -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [ -1,        -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [  0,        -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [  0,        -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [  0,        -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
@@ -38,10 +38,10 @@ var col_limit = 24;
 var currentRow = 0;
 var currentCol = 0;
 var startingLives = 3;
-var minor_boss = .2
+var minor_boss = 0
 
 let story_map = new Map([['0' , "You head down the path."]
-                , [ '1'  , "You escaped with your life in hand. You lucky dog, next time you might not be so lucky..."]
+                , [ 'escape'  , "You escaped with your life in hand. You lucky dog, next time you might not be so lucky..."]
                 , [ '-1' , "You encounter an unmovable rock, you turn back." ]
                 , [ 'm3' , "You hear a sound." ]
                 , [ 'm2' , "A large shadow darts across the path." ]
@@ -117,7 +117,7 @@ export default class HelloWorldApp extends Component {
                   this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") });
                   
                 } else {
-                  this.setState({ displayText: story_map.get ( maze[ currentRow ][ currentCol ] + "") }); 
+                  this.setState({ displayText: story_map.get ( maze[ currentRow - 1 ][ currentCol ] + "") }); 
                 }
               } else {
                 this.setState({ displayText: "There is no path this way, you turn back." });
@@ -195,9 +195,9 @@ export default class HelloWorldApp extends Component {
           onPress={() => {
               var odds = Math.random();
               if( odds > minor_boss ){
-                  currentRow = currentRow + 2;
-                  this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] + "" ) } )
-
+                  currentRow = currentRow + 3;
+                  this.setState({ displayText: story_map.get( 'escape' ) } )
+                  // alert( "current position: " + currentRow + ',' + currentCol )
               }
               else{
                 this.setState({ displayText: story_map.get( 'caught' ) } )
