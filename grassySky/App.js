@@ -11,13 +11,13 @@ var maze = [
          , [  0,         0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [ 'm3',      -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [ 'm2',      -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [ ' 0',      -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [ 'm1',      -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [ 'm0',      -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [ 'agoroth', -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  'm0',     -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [  'm1',     -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [  'm2',     -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [  'm3',     -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,        -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [  0,         0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [  0,         0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [  0,         0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
@@ -38,7 +38,7 @@ var col_limit = 24;
 var currentRow = 0;
 var currentCol = 0;
 var startingLives = 3;
-var minor_boss = .33
+var minor_boss = 0
 
 let story_map = new Map([['0' , "You head down the path."]
                 , [ '-1' , "You encounter an unmovable rock, you turn back." ]
@@ -183,7 +183,7 @@ export default class HelloWorldApp extends Component {
         <ScrollView style={styles.scrollViewStyle} >
           <InteractButton text="Fight!"
             onPress={() => {
-              if( maze[ currentRow + 1 ][ currentCol ] === 'agoroth' ) {
+              if( maze[ currentRow ][ currentCol ] === 'agoroth' ) {
                 currentRow++;
                 this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] + "" ) })
               }
@@ -194,8 +194,9 @@ export default class HelloWorldApp extends Component {
           onPress={() => {
               var odds = Math.random();
               if( odds > minor_boss ){
-                  currentRow++;
+                  currentRow = currentRow + 2;
                   this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] + "" ) } )
+
               }
               else{
                 this.setState({ displayText: story_map.get( 'caught' ) } )
