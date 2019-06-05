@@ -42,7 +42,8 @@ var minor_boss = .01
 var showInteractionBtn = false;
 
 let story_map = new Map([['0' , "You head down the path."]
-                , [ 'escape'  , "You escaped with your life in hand. You lucky dog, next time you might not be so lucky..."]
+                , [ 'escape'  , "You escaped with your life in hand. You lucky dog, head back the way you came. " +
+                                "Next time you might not be so lucky..."]
                 , [ '-1' , "You encounter an unmovable rock, you turn back." ]
                 , [ '1' , "You hear a sound." ]
                 , [ '2' , "A large shadow darts across the path." ]
@@ -149,7 +150,6 @@ export default class HelloWorldApp extends Component {
             text="N"
             onPress={() => {
               this.setState({ buttonPressed: "n" })
-              alert("The button pressed was: " + this.state.buttonPressed )
               this.home();
               if( currentRow > 0 ) {
                 if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
