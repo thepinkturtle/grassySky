@@ -60,13 +60,13 @@ let story_map = new Map([['0' , "You head down the path."]
                 , [ 'caught', "Ha ha ha, nice try you delicous little morsel. You can't escape from me!"]
                 ]);
 
+var monsters = [ ['agoroth', "\"./Resources/agoroth.png\"" ] ];
+
 export default class HelloWorldApp extends Component {
   
   constructor( props ){
     super( props );
     
-    this.backgroundChanger = this.swamp.bind( this );
-    this.backgroundChanger = this.home.bind( this );
     this.lives = this.die.bind( this );
     this.state={
       displayText: 'Hello Traveller',
@@ -84,6 +84,17 @@ export default class HelloWorldApp extends Component {
   home() {
     this.setState({
       backgroundSource: require("./Resources/background.png")
+    });
+  }
+
+  getMonster(){
+    monsters.forEach( monster => {
+      
+      if( monster[ 0 ] ===  maze[ currentRow + 1 ][ currentCol ] ) {
+        source = monster[ 1 ];   
+        
+        alert("made it for sure");
+      }
     });
   }
 
@@ -192,7 +203,7 @@ export default class HelloWorldApp extends Component {
           <InteractButton text="Fight!"
             onPress={() => {
               showInteractionBtn = true;
-              this.agoroth();
+              this.getMonster();
               currentRow++;
               if( isNaN( maze[ currentRow ][ currentCol ] ) ) {
                 showInteractionBtn = false;
