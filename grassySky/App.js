@@ -5,35 +5,35 @@ import { StyleSheet} from 'react-native';
 import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 
 var maze = [
-           [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  1,            -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  2,            -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  3,            -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  4,            -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [ 'agoroth',     -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [ -1,            -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,            -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,            -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,            -1,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ] ];
+           [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  1,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  2,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  3,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  4,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [ 'agoroth',     -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [ -1,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ] ];
 
-var row_limit = 24;
-var col_limit = 24;
+var row_limit = 23;
+var col_limit = 23;
 var currentRow = 0;
 var currentCol = 0;
 var startingLives = 3;
@@ -60,8 +60,10 @@ let story_map = new Map([['0' , "You head down the path."]
                 , [ 'caught', "Ha ha ha, nice try you delicous little morsel. You can't escape from me!"]
                 ]);
 
-var images = [ require("./Resources/agoroth.png"), ];
-var monsters = [ ['agoroth', images[0] ] ];
+var imagesMonsters = [ require("./Resources/agoroth.png"), ];
+var monsters = [ ['agoroth', imagesMonsters[0] ] ];
+let regions_map = new Map([ ['swap', require("./Resources/mangrove.png") ],
+                            ['forest', require("./Resources/background.png") ], ])
 
 export default class HelloWorldApp extends Component {
   
@@ -78,16 +80,18 @@ export default class HelloWorldApp extends Component {
   }
 
   swamp() {
-    this.setState({ 
+    this.setState({
       backgroundSource: require("./Resources/mangrove.png")
     }); 
   }
 
-  home() {
-    this.setState({
-      backgroundSource: require("./Resources/background.png")
-    });
+  backgroundChanger( region ) {
+    if( currentRow < 12 && currentCol > 12 )
+      this.setState({ backgroundSource: regions_map.get( 'swap' ) })
+    else
+      this.setState({ backgroundSource: regions_map.get( 'forest' )})
   }
+
 
   moveTowardMoster(){
     if( this.state.buttonPressed === 'e' )
@@ -119,12 +123,6 @@ export default class HelloWorldApp extends Component {
     });
   }
 
-  agoroth() {
-    this.setState({
-      backgroundSource: require("./Resources/agoroth.png")
-    })
-  }
-
   die() {
     this.setState( () => {
       if( maze[ currentRow ][ currentCol ] === 'dead' ) {
@@ -135,7 +133,7 @@ export default class HelloWorldApp extends Component {
       else if ( this.state.lives === 0 ){
         return { lives: 0 };
       }
-    }, () =>  { if( currentRow === 0 && currentCol === 0) { this.home() } } );
+    }, () =>  { if( currentRow === 0 && currentCol === 0) { this.backgroundChanger('forest') } } );
   }
 
   render() {
@@ -150,7 +148,7 @@ export default class HelloWorldApp extends Component {
             text="N"
             onPress={() => {
               this.setState({ buttonPressed: "n" })
-              this.home();
+              this.backgroundChanger( 'placeholder' );
               if( currentRow > 0 ) {
                 if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
                   currentRow--;
@@ -170,7 +168,7 @@ export default class HelloWorldApp extends Component {
           text="S"
           onPress={() => {
             this.setState({ buttonPressed: 's' })
-            this.swamp();
+            this.backgroundChanger( 'placeholder' );
             if( currentRow < row_limit ) {
               if( maze[ currentRow + 1 ][ currentCol ] !== -1 ) {
                 currentRow++;
@@ -189,6 +187,7 @@ export default class HelloWorldApp extends Component {
           text="E"
           onPress={() => {
             this.setState({ buttonPressed: 'e' })
+            this.backgroundChanger( 'placeholder' );
             if( currentCol < col_limit ) {
               if( maze[ currentRow ][ currentCol + 1 ] !== -1 ) {
                 currentCol++;
@@ -207,6 +206,7 @@ export default class HelloWorldApp extends Component {
           text="W"
           onPress={() => {
             this.setState({ buttonPressed: 'w' })
+            this.backgroundChanger( 'placeholder' );
             if( currentCol > 0 ) {
               if( maze[ currentRow ][ currentCol - 1 ] !== -1 ) {
                 currentCol--;
