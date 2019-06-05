@@ -90,7 +90,7 @@ export default class HelloWorldApp extends Component {
   getMonster(){
     monsters.forEach( monster => {
       
-      if( monster[ 0 ] ===  maze[ currentRow + 1 ][ currentCol ] ) {
+      if( monster[ 0 ] ===  maze[ currentRow ][ currentCol ] ) {
         source = monster[ 1 ];   
         
         alert("made it for sure");
@@ -203,8 +203,8 @@ export default class HelloWorldApp extends Component {
           <InteractButton text="Fight!"
             onPress={() => {
               showInteractionBtn = true;
-              this.getMonster();
               currentRow++;
+              this.getMonster();
               if( isNaN( maze[ currentRow ][ currentCol ] ) ) {
                 showInteractionBtn = false;
                 this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] + "" ) })
