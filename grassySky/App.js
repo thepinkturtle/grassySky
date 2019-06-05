@@ -79,12 +79,6 @@ export default class HelloWorldApp extends Component {
     }
   }
 
-  swamp() {
-    this.setState({
-      backgroundSource: require("./Resources/mangrove.png")
-    }); 
-  }
-
   backgroundChanger( region ) {
     if( currentRow < 12 && currentCol > 12 )
       this.setState({ backgroundSource: regions_map.get( 'swap' ) })
