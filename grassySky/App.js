@@ -37,7 +37,7 @@ var col_limit = 23;
 var currentRow = 0;
 var currentCol = 0;
 var startingLives = 3;
-var minor_boss = .01
+var minor_boss = .33
 var showInteractionBtn = false;
 
 let story_map = new Map([['0' , "You head down the path."]
@@ -86,7 +86,6 @@ export default class HelloWorldApp extends Component {
       this.setState({ backgroundSource: regions_map.get( 'forest' )})
   }
 
-
   moveTowardMoster(){
     if( this.state.buttonPressed === 'e' )
       currentCol++;
@@ -111,6 +110,7 @@ export default class HelloWorldApp extends Component {
 
   getMonster(){
     monsters.forEach( monster => {
+      alert("here: " + maze[ currentRow ][ currentCol ] )
       if( monster[ 0 ] ===  maze[ currentRow ][ currentCol ] ) {
         this.setState({ backgroundSource: monster[ 1 ] } )
       }
@@ -237,8 +237,9 @@ export default class HelloWorldApp extends Component {
                 this.setState({ displayText: story_map.get( 'escape' ) } )
               }
               else{
-                this.agoroth();
-                this.setState({ displayText: story_map.get( 'caught' ) } );
+                this.moveTowardMoster();
+                this.getMonster();
+                this.setState({ displayText: story_map.get( 'caught' ) + " " +  story_map.get(maze[ currentRow ][ currentCol ] + "" ) } );
               }
             }
           }/>
