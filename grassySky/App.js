@@ -71,7 +71,8 @@ export default class HelloWorldApp extends Component {
     this.state={
       displayText: 'Hello Traveller',
       backgroundSource: require("./Resources/background.png"),
-      lives: startingLives
+      lives: startingLives,
+      buttonPressed: '',
     }
   }
 
@@ -87,13 +88,32 @@ export default class HelloWorldApp extends Component {
     });
   }
 
+  moveTowardMoster(){
+    if( this.state.buttonPressed === 'e' )
+      currentCol++;
+    if( this.state.buttonPressed === 'w' )
+      currentCol--;
+    if( this.state.buttonPressed === 'n' )
+      currentRow--;
+    if( this.state.buttonPressed === 's' )
+      currentRow++;
+  }
+
+  moveAwayMoster(){
+    if( this.state.buttonPressed === 'e' )
+      currentCol--;
+    if( this.state.buttonPressed === 'w' )
+      currentCol++;
+    if( this.state.buttonPressed === 'n' )
+      currentRow++;
+    if( this.state.buttonPressed === 's' )
+      currentRow--; 
+  }
+
   getMonster(){
     monsters.forEach( monster => {
-      
       if( monster[ 0 ] ===  maze[ currentRow ][ currentCol ] ) {
         source = monster[ 1 ];   
-        
-        alert("made it for sure");
       }
     });
   }
@@ -128,6 +148,8 @@ export default class HelloWorldApp extends Component {
           <NavButton 
             text="N"
             onPress={() => {
+              this.setState({ buttonPressed: "n" })
+              alert("The button pressed was: " + this.state.buttonPressed )
               this.home();
               if( currentRow > 0 ) {
                 if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
@@ -147,6 +169,7 @@ export default class HelloWorldApp extends Component {
           <NavButton 
           text="S"
           onPress={() => {
+            this.setState({ buttonPressed: 's' })
             this.swamp();
             if( currentRow < row_limit ) {
               if( maze[ currentRow + 1 ][ currentCol ] !== -1 ) {
@@ -165,7 +188,7 @@ export default class HelloWorldApp extends Component {
         <NavButton 
           text="E"
           onPress={() => {
-
+            this.setState({ buttonPressed: 'e' })
             if( currentCol < col_limit ) {
               if( maze[ currentRow ][ currentCol + 1 ] !== -1 ) {
                 currentCol++;
@@ -183,7 +206,7 @@ export default class HelloWorldApp extends Component {
         <NavButton 
           text="W"
           onPress={() => {
-
+            this.setState({ buttonPressed: 'w' })
             if( currentCol > 0 ) {
               if( maze[ currentRow ][ currentCol - 1 ] !== -1 ) {
                 currentCol--;
@@ -203,7 +226,7 @@ export default class HelloWorldApp extends Component {
           <InteractButton text="Fight!"
             onPress={() => {
               showInteractionBtn = true;
-              currentRow++;
+              this.moveTowardMoster();
               this.getMonster();
               if( isNaN( maze[ currentRow ][ currentCol ] ) ) {
                 showInteractionBtn = false;
@@ -214,11 +237,10 @@ export default class HelloWorldApp extends Component {
           />
           <InteractButton text="Run!"
           onPress={() => {
-              var odds = Math.random();
-              if( odds > minor_boss ){
-                  currentRow = currentRow + 3;
-                  this.setState({ displayText: story_map.get( 'escape' ) } )
-                  // alert( "current position: " + currentRow + ',' + currentCol )
+            var odds = Math.random();
+            if( odds > minor_boss ){
+                this.moveAwayMoster();
+                this.setState({ displayText: story_map.get( 'escape' ) } )
               }
               else{
                 this.agoroth();
@@ -237,7 +259,7 @@ export default class HelloWorldApp extends Component {
 class NavButton extends Component {
 	render() {
     var position = maze[ currentRow ][ currentCol ];
-    const display = ( position > 3 || isNaN( position )? "none" : "flex" )
+    const display = ( position > 3 || isNaN( position ) ? "none" : "flex" )
 		const { text, onPress } = this.props;
 		return (
 		  <TouchableOpacity style={[styles.buttonStyle, { display } ] }
