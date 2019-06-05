@@ -4,7 +4,6 @@ import { Text, View } from 'react-native';
 import { StyleSheet} from 'react-native';
 import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 
-
 var maze = [
            [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
          , [  0,             0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
@@ -61,7 +60,8 @@ let story_map = new Map([['0' , "You head down the path."]
                 , [ 'caught', "Ha ha ha, nice try you delicous little morsel. You can't escape from me!"]
                 ]);
 
-var monsters = [ ['agoroth', "\"./Resources/agoroth.png\"" ] ];
+var images = [ require("./Resources/agoroth.png"), ];
+var monsters = [ ['agoroth', images[0] ] ];
 
 export default class HelloWorldApp extends Component {
   
@@ -80,7 +80,7 @@ export default class HelloWorldApp extends Component {
   swamp() {
     this.setState({ 
       backgroundSource: require("./Resources/mangrove.png")
-    });
+    }); 
   }
 
   home() {
@@ -114,7 +114,7 @@ export default class HelloWorldApp extends Component {
   getMonster(){
     monsters.forEach( monster => {
       if( monster[ 0 ] ===  maze[ currentRow ][ currentCol ] ) {
-        source = monster[ 1 ];   
+        this.setState({ backgroundSource: monster[ 1 ] } )
       }
     });
   }
@@ -285,6 +285,8 @@ class InteractButton extends Component {
 		);
 	}
 }
+
+
 
 class Agoroth extends Component {
   render(){
