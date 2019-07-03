@@ -63,25 +63,26 @@ let story_map = new Map([['0' , "You head down the path."]
 
 var imagesMonsters = [ require("./Resources/agoroth.png"), ];
 
-var challenge = [ ['agoroth', "What is always near but never here? " +
-                   "Looked forward to by many and dreaded by others? " +
-                   "It is the procrastinators safe harbor and day of reckoning."
+var challenge = [ ['agoroth'
+                   , "What is always near but never here? " +
+                     "Looked forward to by many and dreaded by others? " +
+                     "It is the procrastinators safe harbor and day of reckoning."
                    , 'Tomorrow'
                    , "Grrraaaaahh! I need flesh! You are a lucky one. " + 
-                   "I wish you much doom and misery on your journey. I shall bother you no more. " + 
-                   "Please I beg of you, if there are any other juice souls you find on your journey send them into the Dark Forest. Be Gone!"
-                  ,"HA HA HAHAHA! I HUNGER! Please don't fear! I will consume your flesh, however you soul will remain intact forever racked " +
+                     "I wish you much doom and misery on your journey. I shall bother you no more. " + 
+                     "Please I beg of you, if there are any other juice souls you find on your journey send them into the Dark Forest. Be Gone!"
+                   ,"HA HA HAHAHA! I HUNGER! Please don't fear! I will consume your flesh, however you soul will remain intact forever racked " +
                     "with torment and pain under my control in the Dark Forest!" ], ];
 
-var monsters = [ ['agoroth', imagesMonsters[0], challenge[0]], ];
-let regions_map = new Map([ ['swap', require("./Resources/mangrove.png") ],
-                            ['forest', require("./Resources/background.png") ], ])
-
-export default class HelloWorldApp extends Component {
-  
-  constructor( props ){
-    super( props );
-    
+                    var monsters = [ ['agoroth', imagesMonsters[0], challenge[0], 'A'], ];
+                    let regions_map = new Map([ ['swap', require("./Resources/mangrove.png") ],
+                    ['forest', require("./Resources/background.png") ], ])
+                    
+                    export default class HelloWorldApp extends Component {
+                      
+                      constructor( props ){
+                        super( props );
+                        
     this.lives = this.die.bind( this );
     this.state={
       displayText: 'Hello Traveller',
@@ -90,15 +91,33 @@ export default class HelloWorldApp extends Component {
       buttonPressed: '',
     }
   }
+  
+  displayRiddle( challenge ) {
+      monsters.forEach( monster => {
+        if( monster[0] === challenge ){
+          this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] ) + " " + monster[2][1] })
+        }
+      })
+  }
+
+  checkAnswer( challenge, choice ){
+    monsters.forEach( monster => {
+      if( monster[0] === challenge ){
+        if( choice === monster[3] ){
+          this.setState({ displayText: monster[2][3]})
+        }
+      }
+    });
+  }
 
   backgroundChanger( region ) {
     if( currentRow < 12 && currentCol > 12 )
       this.setState({ backgroundSource: regions_map.get( 'swap' ) })
-    else
+      else
       this.setState({ backgroundSource: regions_map.get( 'forest' )})
-  }
+    }
 
-  moveTowardMoster(){
+    moveTowardMoster(){
     if( this.state.buttonPressed === 'e' )
       currentCol++;
     if( this.state.buttonPressed === 'w' )
@@ -141,9 +160,6 @@ export default class HelloWorldApp extends Component {
     }, () =>  { if( currentRow === 0 && currentCol === 0) { this.backgroundChanger('forest') } } );
   }
 
-  checkAnswer( challenge, choice ) {
-    alert("the challenge is: " + challenge + " The choice is: " + choice );
-  }
 
   render() {
     return (
@@ -239,7 +255,9 @@ export default class HelloWorldApp extends Component {
               this.getMonster();
               if( isNaN( maze[ currentRow ][ currentCol ] ) ) {
                 showInteractionBtn = false;
-                this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] + "" ) })
+                // this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] + "" ) })
+                this.displayRiddle( maze[ currentRow ][ currentCol] )
+
               }
             }
           }
@@ -260,8 +278,8 @@ export default class HelloWorldApp extends Component {
           }/>
           <Choice text="A"
             onPress={() => {
-              alert("You chose A");
-              this.checkAnswer( maze[ currentRow ][ currentCol], 'A' )
+              this.checkAnswer( maze[ currentRow ][ currentCol ], 'A' );
+
             }}/>
 
           <Choice text="B"
