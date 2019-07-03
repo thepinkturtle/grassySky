@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { StyleSheet} from 'react-native';
 import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import { map } from 'rsvp';
 
 var maze = [
            [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
@@ -61,7 +62,18 @@ let story_map = new Map([['0' , "You head down the path."]
                 ]);
 
 var imagesMonsters = [ require("./Resources/agoroth.png"), ];
-var monsters = [ ['agoroth', imagesMonsters[0] ] ];
+
+var challenge = [ ['agoroth', "What is always near but never here? " +
+                   "Looked forward to by many and dreaded by others? " +
+                   "It is the procrastinators safe harbor and day of reckoning."
+                   , 'Tomorrow'
+                   , "Grrraaaaahh! I need flesh! You are a lucky one. " + 
+                   "I wish you much doom and misery on your journey. I shall bother you no more. " + 
+                   "Please I beg of you, if there are any other juice souls you find on your journey send them into the Dark Forest. Be Gone!"
+                  ,"HA HA HAHAHA! I HUNGER! Please don't fear! I will consume your flesh, however you soul will remain intact forever racked " +
+                    "with torment and pain under my control in the Dark Forest!" ], ];
+
+var monsters = [ ['agoroth', imagesMonsters[0], challenge[0]], ];
 let regions_map = new Map([ ['swap', require("./Resources/mangrove.png") ],
                             ['forest', require("./Resources/background.png") ], ])
 
@@ -110,7 +122,6 @@ export default class HelloWorldApp extends Component {
 
   getMonster(){
     monsters.forEach( monster => {
-      alert("here: " + maze[ currentRow ][ currentCol ] )
       if( monster[ 0 ] ===  maze[ currentRow ][ currentCol ] ) {
         this.setState({ backgroundSource: monster[ 1 ] } )
       }
@@ -128,6 +139,10 @@ export default class HelloWorldApp extends Component {
         return { lives: 0 };
       }
     }, () =>  { if( currentRow === 0 && currentCol === 0) { this.backgroundChanger('forest') } } );
+  }
+
+  checkAnswer( challenge, choice ) {
+    alert("the challenge is: " + challenge + " The choice is: " + choice );
   }
 
   render() {
@@ -243,6 +258,27 @@ export default class HelloWorldApp extends Component {
               }
             }
           }/>
+          <Choice text="A"
+            onPress={() => {
+              alert("You chose A");
+              this.checkAnswer( maze[ currentRow ][ currentCol], 'A' )
+            }}/>
+
+          <Choice text="B"
+            onPress={() => {
+            alert("You chose B");
+            }}/>
+
+          <Choice text="C"
+            onPress={() => {
+            alert("You chose C");
+            }}/>
+
+          <Choice text="D"
+            onPress={() => {
+            alert("You chose D");
+            }}/>
+
           <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
         </ScrollView>
         </ImageBackground>
@@ -281,6 +317,21 @@ class InteractButton extends Component {
 	}
 }
 
+class Choice extends Component {
+	render() {
+    var position = maze[ currentRow ][ currentCol ];
+    const display =  isNaN( position ) ? "flex" : "none";
+    const { text, onPress } = this.props;
+    
+		return (
+		  <TouchableOpacity style={[styles.buttonStyle, { display } ] }
+      onPress={() => onPress()}
+      >
+			 <Text style={styles.textStyle}>{text}</Text>
+		  </TouchableOpacity>
+		);
+	}
+}
 
 
 class Agoroth extends Component {
