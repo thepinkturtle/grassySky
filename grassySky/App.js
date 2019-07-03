@@ -54,7 +54,7 @@ let story_map = new Map([['0' , "You head down the path."]
 
                 , [ 'dead' , "You died..." ]
                 , [ 'agoroth', "My name is, Agoroth! I am the mighty demon of the black woods. You seem like a clever enough " +
-                  "fool. Hand to hand combat is only uncultered swine. I will make a deal with you. A battle of wits! If I win " +
+                  "fool. Hand to hand combat is only for uncultered swine. I will make a deal with you. A battle of wits! If I win " +
                   "I get to consume your soul and you will remain a prisoner to me, trapped in the dark diminsion, forever my slave. " +
                   "If you win, I will let your spirit remain in that bag of flesh, and you may pass without further strife from me." ] 
                 , [ 'caught', "Ha ha ha, nice try you delicous little morsel. You can't escape from me!"]
@@ -133,7 +133,7 @@ export default class HelloWorldApp extends Component {
   render() {
     return (
 
-      <View style={{ flex: 1, alignItems: "flex-end" }}>
+      <View style={{ flexGrow: 1, alignItems: "flex-end" }}>
         <ImageBackground
           source={this.state.backgroundSource} style={ styles.image}>
           <Text>{this.state.lives}</Text>
@@ -352,7 +352,7 @@ const styles = StyleSheet.create( {
     },
     
   scrollViewStyle: {
-    flex: 1,
+    flexGrow: 1,
     bottom: 0,
     position: 'absolute',
     width: "100%",
