@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { StyleSheet} from 'react-native';
 import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
-import { map } from 'rsvp';
 
 var maze = [
            [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
@@ -40,6 +39,7 @@ var currentCol = 0;
 var startingLives = 3;
 var minor_boss = .33
 var showInteractionBtn = false;
+var fighting = false;
 
 let story_map = new Map([['0' , "You head down the path."]
                 , [ 'escape'  , "You escaped with your life in hand. You lucky dog, head back the way you came. " +
@@ -74,7 +74,7 @@ var challenge = [ ['agoroth'
                    ,"HA HA HAHAHA! I HUNGER! Please don't fear! I will consume your flesh, however you soul will remain intact forever racked " +
                     "with torment and pain under my control in the Dark Forest!" ], ];
 
-var monsters = [ ['agoroth', imagesMonsters[0], challenge[0], 'A'], ];
+var monsters = [ ['agoroth', imagesMonsters[0], challenge[0], 'A', false, 9, 0 ], ];
 
 let regions_map = new Map([ ['swap', require("./Resources/mangrove.png") ],
                             ['forest', require("./Resources/background.png") ], ])
@@ -104,9 +104,13 @@ export default class HelloWorldApp extends Component {
   checkAnswer( challenge, choice ){
     monsters.forEach( monster => {
       if( monster[0] === challenge ){
+
         if( choice === monster[3] ){
           this.setState({ displayText: monster[2][2]})
-
+          fighting = false;
+          monster[4] = true;
+          currentRow = monster[5];
+          currentCol = monster[6];
         }
         else{ 
           this.setState({ displayText: monster[2][3] })
@@ -188,7 +192,6 @@ export default class HelloWorldApp extends Component {
               } else {
                 this.setState({ displayText: "There is no path this way, you turn back." });
               }
-              this.die();
             }}
           />
 
@@ -226,7 +229,6 @@ export default class HelloWorldApp extends Component {
             } else {
               this.setState({ displayText:"There is no path this way, you turn around."  })
             }
-            this.die();
           }}
         />
 
@@ -245,7 +247,6 @@ export default class HelloWorldApp extends Component {
             } else {
               this.setState({ displayText:"There is no path this way, you turn around." })
             }
-            this.die();
           }
         }
         />
@@ -257,6 +258,7 @@ export default class HelloWorldApp extends Component {
           <View style={{ flexGrow: 1}}>
               <InteractButton text="Fight!"
                 onPress={() => {
+                  fighting = true;
                   showInteractionBtn = true;
                   this.moveTowardMoster();
                   this.getMonster();
@@ -272,17 +274,19 @@ export default class HelloWorldApp extends Component {
               onPress={() => {
                 var odds = Math.random();
                 if( odds > minor_boss ){
+                    fighting = false;
                     this.moveAwayMoster();
                     this.setState({ displayText: story_map.get( 'escape' ) } )
                   }
-                  else{
+                else{
+                    fighting = true;
                     this.moveTowardMoster();
                     this.getMonster();
                     this.setState({ displayText: story_map.get( 'caught' ) + " " +  story_map.get(maze[ currentRow ][ currentCol ] + "" ) } );
                   }
                 }
               }/>
-              <View style={{flex: 1, flexDirection: 'row'}}>
+              <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                 <Choice text="A"
                   onPress={() => {
                     this.checkAnswer( maze[ currentRow ][ currentCol ], 'A' );
@@ -319,7 +323,7 @@ export default class HelloWorldApp extends Component {
 class NavButton extends Component {
 	render() {
     var position = maze[ currentRow ][ currentCol ];
-    const display = ( position > 3 || isNaN( position ) ? "none" : "flex" )
+    const display = ( position > 3 || fighting ) ? "none" : "flex" 
 		const { text, onPress } = this.props;
 		return (
 		  <TouchableOpacity style={[styles.buttonStyle, { display } ] }
@@ -348,24 +352,7 @@ class InteractButton extends Component {
 
 class Choice extends Component {
 	render() {
-    var position = maze[ currentRow ][ currentCol ];
-    const display =  isNaN( position ) ? "flex" : "none";
-    const { text, onPress } = this.props;
-    
-		return (
-		  <TouchableOpacity style={[styles.buttonStyle, { display } ] }
-      onPress={() => onPress()}
-      >
-			 <Text style={styles.textStyle}>{text}</Text>
-		  </TouchableOpacity>
-		);
-	}
-}
-
-class Continue extends Component {
-	render() {
-    var position = maze[ currentRow ][ currentCol ];
-    const display =  isNaN( position ) ? "flex" : "none";
+    const display =  fighting ? "flex" : "none";
     const { text, onPress } = this.props;
     
 		return (
