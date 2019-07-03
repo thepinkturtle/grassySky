@@ -167,7 +167,7 @@ export default class HelloWorldApp extends Component {
     return (
 
       <View style={{ flexGrow: 1, alignItems: "flex-end" }}>
-        <ImageBackground
+        <ImageBackground style={{flexGrow: 1}}
           source={this.state.backgroundSource} style={ styles.image}>
           <Text>{this.state.lives}</Text>
           
@@ -280,29 +280,29 @@ export default class HelloWorldApp extends Component {
           <Choice text="A"
             onPress={() => {
               this.checkAnswer( maze[ currentRow ][ currentCol ], 'A' );
-
+              
             }}/>
-
+  
           <Choice text="B"
             onPress={() => {
             this.checkAnswer( maze[ currentRow ][ currentCol ], 'B' );
-
+              
             }}/>
-
+  
           <Choice text="C"
             onPress={() => {
             this.checkAnswer( maze[ currentRow ][ currentCol ], 'C' );
-
+              
             }}/>
-
+  
           <Choice text="D"
             onPress={() => {
             this.checkAnswer( maze[ currentRow ][ currentCol ], 'D' );
-
+              
             }}/>
-
+  
           <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
-        </ScrollView>
+          </ScrollView>
         </ImageBackground>
       </View>
     );
@@ -353,13 +353,6 @@ class Choice extends Component {
 		  </TouchableOpacity>
 		);
 	}
-}
-
-
-class Agoroth extends Component {
-  render(){
-
-  }
 }
 
 const styles = StyleSheet.create( {
@@ -429,6 +422,7 @@ const styles = StyleSheet.create( {
     bottom: 0,
     position: 'absolute',
     width: "100%",
+
   },
 
   image: {
