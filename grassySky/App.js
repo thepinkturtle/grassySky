@@ -54,7 +54,7 @@ let story_map = new Map([['0' , "You head down the path."]
                          "Too late, its mouth opens wide and it lurches toward you..." ]
 
                 , [ 'dead' , "You died..." ]
-                , [ 'agoroth', "My name is, Agoroth! I am the mighty demon of the black woods. You seem like a clever enough " +
+                , [ 'agoroth', "My name is, Agoroth! I am the mighty demon of the Black Woods. You seem like a clever enough " +
                   "fool. Hand to hand combat is only for uncultered swine. I will make a deal with you. A battle of wits! If I win " +
                   "I get to consume your soul and you will remain a prisoner to me, trapped in the dark diminsion, forever my slave. " +
                   "If you win, I will let your spirit remain in that bag of flesh, and you may pass without further strife from me." ] 
@@ -64,24 +64,25 @@ let story_map = new Map([['0' , "You head down the path."]
 var imagesMonsters = [ require("./Resources/agoroth.png"), ];
 
 var challenge = [ ['agoroth'
-                   , "What is always near but never here? " +
+                   , "\n\nWhat is always near but never here? " +
                      "Looked forward to by many and dreaded by others? " +
-                     "It is the procrastinators safe harbor and day of reckoning."
-                   , 'Tomorrow'
+                     "It is the procrastinators safe harbor and day of reckoning." +
+                     "\n\nA: Tomorrow\nB: Forever\nC: The future\nD: The past"
                    , "Grrraaaaahh! I need flesh! You are a lucky one. " + 
                      "I wish you much doom and misery on your journey. I shall bother you no more. " + 
-                     "Please I beg of you, if there are any other juice souls you find on your journey send them into the Dark Forest. Be Gone!"
+                     "Please I beg of you, if there are any other juice souls you find on your journey send them into the Black Woods. Be Gone!"
                    ,"HA HA HAHAHA! I HUNGER! Please don't fear! I will consume your flesh, however you soul will remain intact forever racked " +
                     "with torment and pain under my control in the Dark Forest!" ], ];
 
-                    var monsters = [ ['agoroth', imagesMonsters[0], challenge[0], 'A'], ];
-                    let regions_map = new Map([ ['swap', require("./Resources/mangrove.png") ],
-                    ['forest', require("./Resources/background.png") ], ])
-                    
-                    export default class HelloWorldApp extends Component {
-                      
-                      constructor( props ){
-                        super( props );
+var monsters = [ ['agoroth', imagesMonsters[0], challenge[0], 'A'], ];
+
+let regions_map = new Map([ ['swap', require("./Resources/mangrove.png") ],
+                            ['forest', require("./Resources/background.png") ], ])
+
+export default class HelloWorldApp extends Component {
+  
+  constructor( props ){
+    super( props );
                         
     this.lives = this.die.bind( this );
     this.state={
@@ -104,7 +105,11 @@ var challenge = [ ['agoroth'
     monsters.forEach( monster => {
       if( monster[0] === challenge ){
         if( choice === monster[3] ){
-          this.setState({ displayText: monster[2][3]})
+          this.setState({ displayText: monster[2][2]})
+        }
+        else{ 
+          this.setState({ displayText: monster[2][3] })
+          this.die();
         }
       }
     });
@@ -149,13 +154,10 @@ var challenge = [ ['agoroth'
 
   die() {
     this.setState( () => {
-      if( maze[ currentRow ][ currentCol ] === 'dead' ) {
+      if( this.state.lives > 0 ) {
         currentRow = 0;
         currentCol = 0;
         return { lives: this.state.lives - 1 };
-      } 
-      else if ( this.state.lives === 0 ){
-        return { lives: 0 };
       }
     }, () =>  { if( currentRow === 0 && currentCol === 0) { this.backgroundChanger('forest') } } );
   }
@@ -255,7 +257,6 @@ var challenge = [ ['agoroth'
               this.getMonster();
               if( isNaN( maze[ currentRow ][ currentCol ] ) ) {
                 showInteractionBtn = false;
-                // this.setState({ displayText: story_map.get( maze[ currentRow ][ currentCol ] + "" ) })
                 this.displayRiddle( maze[ currentRow ][ currentCol] )
 
               }
@@ -284,17 +285,20 @@ var challenge = [ ['agoroth'
 
           <Choice text="B"
             onPress={() => {
-            alert("You chose B");
+            this.checkAnswer( maze[ currentRow ][ currentCol ], 'B' );
+
             }}/>
 
           <Choice text="C"
             onPress={() => {
-            alert("You chose C");
+            this.checkAnswer( maze[ currentRow ][ currentCol ], 'C' );
+
             }}/>
 
           <Choice text="D"
             onPress={() => {
-            alert("You chose D");
+            this.checkAnswer( maze[ currentRow ][ currentCol ], 'D' );
+
             }}/>
 
           <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
