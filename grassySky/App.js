@@ -67,7 +67,7 @@ var challenge = [ ['agoroth'
                    , "\n\nWhat is always near but never here? " +
                      "Looked forward to by many and dreaded by others? " +
                      "It is the procrastinators safe harbor and day of reckoning." +
-                     "\n\nA: Tomorrow\nB: Forever\nC: The future\nD: The past"
+                     "\nA: Tomorrow\nB: Forever\nC: The future\nD: The past"
                    , "Grrraaaaahh! I need flesh! You are a lucky one. " + 
                      "I wish you much doom and misery on your journey. I shall bother you no more. " + 
                      "Please I beg of you, if there are any other juice souls you find on your journey send them into the Black Woods. Be Gone!"
@@ -106,6 +106,7 @@ export default class HelloWorldApp extends Component {
       if( monster[0] === challenge ){
         if( choice === monster[3] ){
           this.setState({ displayText: monster[2][2]})
+
         }
         else{ 
           this.setState({ displayText: monster[2][3] })
@@ -166,8 +167,8 @@ export default class HelloWorldApp extends Component {
   render() {
     return (
 
-      <View style={{ flexGrow: 1, alignItems: "flex-end" }}>
-        <ImageBackground style={{flexGrow: 1}}
+      <View style={{ flex: 1, alignItems: "flex-end" }}>
+        <ImageBackground style={{flex: 1}}
           source={this.state.backgroundSource} style={ styles.image}>
           <Text>{this.state.lives}</Text>
           
@@ -249,61 +250,67 @@ export default class HelloWorldApp extends Component {
         }
         />
 
-        <ScrollView style={styles.scrollViewStyle} >
-          <InteractButton text="Fight!"
-            onPress={() => {
-              showInteractionBtn = true;
-              this.moveTowardMoster();
-              this.getMonster();
-              if( isNaN( maze[ currentRow ][ currentCol ] ) ) {
-                showInteractionBtn = false;
-                this.displayRiddle( maze[ currentRow ][ currentCol] )
-
-              }
-            }
-          }
-          />
-          <InteractButton text="Run!"
-          onPress={() => {
-            var odds = Math.random();
-            if( odds > minor_boss ){
-                this.moveAwayMoster();
-                this.setState({ displayText: story_map.get( 'escape' ) } )
-              }
-              else{
-                this.moveTowardMoster();
-                this.getMonster();
-                this.setState({ displayText: story_map.get( 'caught' ) + " " +  story_map.get(maze[ currentRow ][ currentCol ] + "" ) } );
-              }
-            }
-          }/>
-          <Choice text="A"
-            onPress={() => {
-              this.checkAnswer( maze[ currentRow ][ currentCol ], 'A' );
-              
-            }}/>
-  
-          <Choice text="B"
-            onPress={() => {
-            this.checkAnswer( maze[ currentRow ][ currentCol ], 'B' );
-              
-            }}/>
-  
-          <Choice text="C"
-            onPress={() => {
-            this.checkAnswer( maze[ currentRow ][ currentCol ], 'C' );
-              
-            }}/>
-  
-          <Choice text="D"
-            onPress={() => {
-            this.checkAnswer( maze[ currentRow ][ currentCol ], 'D' );
-              
-            }}/>
-  
-          <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
-          </ScrollView>
+        
         </ImageBackground>
+
+        <ScrollView style={styles.scrollViewStyle} >
+          <View style={{ flexGrow: 1}}>
+              <InteractButton text="Fight!"
+                onPress={() => {
+                  showInteractionBtn = true;
+                  this.moveTowardMoster();
+                  this.getMonster();
+                  if( isNaN( maze[ currentRow ][ currentCol ] ) ) {
+                    showInteractionBtn = false;
+                    this.displayRiddle( maze[ currentRow ][ currentCol] )
+
+                  }
+                }
+              }
+              />
+              <InteractButton text="Run!"
+              onPress={() => {
+                var odds = Math.random();
+                if( odds > minor_boss ){
+                    this.moveAwayMoster();
+                    this.setState({ displayText: story_map.get( 'escape' ) } )
+                  }
+                  else{
+                    this.moveTowardMoster();
+                    this.getMonster();
+                    this.setState({ displayText: story_map.get( 'caught' ) + " " +  story_map.get(maze[ currentRow ][ currentCol ] + "" ) } );
+                  }
+                }
+              }/>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+                <Choice text="A"
+                  onPress={() => {
+                    this.checkAnswer( maze[ currentRow ][ currentCol ], 'A' );
+                    
+                  }}/>
+        
+                <Choice text="B"
+                  onPress={() => {
+                  this.checkAnswer( maze[ currentRow ][ currentCol ], 'B' );
+                    
+                  }}/>
+        
+                <Choice text="C"
+                  onPress={() => {
+                  this.checkAnswer( maze[ currentRow ][ currentCol ], 'C' );
+                    
+                  }}/>
+        
+                <Choice text="D"
+                  onPress={() => {
+                  this.checkAnswer( maze[ currentRow ][ currentCol ], 'D' );
+                    
+                  }}/>
+              </View>
+
+              <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
+            </View>
+          </ScrollView>
       </View>
     );
   }
@@ -355,6 +362,22 @@ class Choice extends Component {
 	}
 }
 
+class Continue extends Component {
+	render() {
+    var position = maze[ currentRow ][ currentCol ];
+    const display =  isNaN( position ) ? "flex" : "none";
+    const { text, onPress } = this.props;
+    
+		return (
+		  <TouchableOpacity style={[styles.buttonStyle, { display } ] }
+      onPress={() => onPress()}
+      >
+			 <Text style={styles.textStyle}>{text}</Text>
+		  </TouchableOpacity>
+		);
+	}
+}
+
 const styles = StyleSheet.create( {
 
   outputBox: {
@@ -384,11 +407,11 @@ const styles = StyleSheet.create( {
   },
   
   displayStyle: {
+    flex: 1,
     fontSize: 20,
     width: '100%',
     backgroundColor: "lightgrey",
     color: 'gray',
-    flex: 1,
     justifyContent: 'flex-end',
     alignSelf: "stretch",
     textAlign: 'center',
@@ -422,7 +445,7 @@ const styles = StyleSheet.create( {
     bottom: 0,
     position: 'absolute',
     width: "100%",
-
+   
   },
 
   image: {
