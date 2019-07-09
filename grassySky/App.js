@@ -81,7 +81,7 @@ var challenge = [ ['agoroth'
                   ['delirium weaver'
                    , "\n\nA boy has as many sisters as brothers, but each sister has only half " + 
                      "as many sisters as brothers. How many brothers and sisters are there in the family?" +
-                     "\nA 4 brothers and 2 sisters" + 
+                     "\n\nA 4 brothers and 2 sisters" + 
                      "\nB 5 brothers and 5 sisters" +
                      "\nC 4 brothers and 4 sisters" +
                      "\nD 4 brothers and 3 sisters"
@@ -330,8 +330,9 @@ export default class HelloWorldApp extends Component {
                     
                   }}/>
               </View>
-
-              <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
+              <View style={{flex: 1}}>
+                <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
+              </View>
             </View>
           </ScrollView>
       </View>
