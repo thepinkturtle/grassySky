@@ -115,6 +115,7 @@ export default class HelloWorldApp extends Component {
         else{ 
           this.setState({ displayText: monster[2][3] })
           this.die();
+          fighting = false;
         }
       }
     });
@@ -352,7 +353,7 @@ class InteractButton extends Component {
 
 class Choice extends Component {
 	render() {
-    const display =  fighting ? "flex" : "none";
+    const display = fighting ? "flex" : "none";
     const { text, onPress } = this.props;
     
 		return (
