@@ -74,6 +74,7 @@ var challenge = [ ['agoroth'
                    ,"HA HA HAHAHA! I HUNGER! Please don't fear! I will consume your flesh, however you soul will remain intact forever racked " +
                     "with torment and pain under my control in the Dark Forest!" ], ];
 
+// monster_name, monster_image, riddle, correct_answer, monster_faught, row_location_after_fight, col_location_after_fight
 var monsters = [ ['agoroth', imagesMonsters[0], challenge[0], 'A', false, 9, 0 ], ];
 
 let regions_map = new Map([ ['swap', require("./Resources/mangrove.png") ],
