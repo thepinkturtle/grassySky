@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { StyleSheet} from 'react-native';
-import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import { TouchableOpacity, ScrollView, ImageBackground, LayoutAnimation } from 'react-native';
 
 var maze = [
            [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  3,  4,  'delirium weaver', -1,  0,  0,  0 ]
@@ -86,7 +86,7 @@ var challenge = [ ['agoroth'
                      "\nC 4 brothers and 4 sisters" +
                      "\nD 4 brothers and 3 sisters"
                    , "Yessssss, ssssseven ssssavory children! You may passssss tassssty traveler. I hope to sssssee you again..."
-                   , "Boil and coil and toil and oil! Fresh flesh for me the thresh! Dreams will take you far and wide, my nightmare " +
+                   , "Boil and coil and toil and oil! Fresh flesh for me to thresh! Dreams will take you far and wide, my nightmare " +
                      "will blind you, find you and grind yoooou... DIE!"
                   ], ];
 
@@ -108,6 +108,7 @@ export default class HelloWorldApp extends Component {
       backgroundSource: require("./Resources/background.png"),
       lives: startingLives,
       buttonPressed: '',
+      expanded: false,
     }
   }
   
@@ -184,6 +185,11 @@ export default class HelloWorldApp extends Component {
         return { lives: this.state.lives - 1 };
       }
     }, () =>  { if( currentRow === 0 && currentCol === 0) { this.backgroundChanger('forest') } } );
+  }
+
+  changeLayout = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    this.setState({ expanded: !this.state.expanded });
   }
 
 
@@ -330,8 +336,12 @@ export default class HelloWorldApp extends Component {
                     
                   }}/>
               </View>
-              <View style={{flex: 1}}>
-                <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
+              <View>
+                <TouchableOpacity activeOpacity={0.8} onPress={this.changeLayout}>
+                  <View style={{ height: this.state.expanded ? null : 50, overflow: 'hidden' }}>
+                    <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
+                  </View>
+                </TouchableOpacity>
               </View>
             </View>
           </ScrollView>
