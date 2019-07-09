@@ -87,7 +87,7 @@ var challenge = [ ['agoroth'
                      "\nD 4 brothers and 3 sisters"
                    , "Yessssss, ssssseven ssssavory children! You may passssss tassssty traveler. I hope to sssssee you again..."
                    , "Boil and coil and toil and oil! Fresh flesh for me the thresh! Dreams will take you far and wide, my nightmare " +
-                     "will blind you, find you and grind you, TO FODDER!"
+                     "will blind you, find you and grind yoooou... DIE!"
                   ], ];
 
 // monster_name, monster_image, riddle, correct_answer, monster_faught, row_location_after_fight, col_location_after_fight
