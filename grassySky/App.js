@@ -5,32 +5,32 @@ import { StyleSheet} from 'react-native';
 import { TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 
 var maze = [
-           [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  1,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  2,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  3,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  4,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [ 'agoroth',     -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [ -1,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,            -1,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ]
-         , [  0,             0,  0,  0,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ,  0,  0,  0,  0,  0 ] ];
+           [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  3,  4,  'delirium weaver', -1,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -1,          -1       , -1,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  1,            -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  2,            -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  3,            -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  4,            -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [ 'agoroth',     -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [ -1,            -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,            -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,            -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,            -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ]
+         , [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,          0        ,  0,  0,  0,  0 ] ];
 
 var row_limit = 23;
 var col_limit = 23;
@@ -58,10 +58,14 @@ let story_map = new Map([['0' , "You head down the path."]
                   "fool. Hand to hand combat is only for uncultered swine. I will make a deal with you. A battle of wits! If I win " +
                   "I get to consume your soul and you will remain a prisoner to me, trapped in the dark diminsion, forever my slave. " +
                   "If you win, I will let your spirit remain in that bag of flesh, and you may pass without further strife from me." ] 
+                , ['delirium weaver', "Dreams are my hooks. Scarey stories my Books! Dastardly dreary. Painfully pungent. " +
+                   "Horrifically horrifying. I manifest in dreams and feed on feelings. Delirium dreams are my dreadful needle. " +
+                   "Twisting threads of time and trouble. I am a Master cleaver. Call me, Delirium Weaver! Bow to me as I riddle and fiddle... "]
                 , [ 'caught', "Ha ha ha, nice try you delicous little morsel. You can't escape from me!"]
                 ]);
 
-var imagesMonsters = [ require("./Resources/agoroth.png"), ];
+var imagesMonsters = [ require("./Resources/agoroth.png")
+                      ,require("./Resources/delirium_weaver.jpg") ];
 
 var challenge = [ ['agoroth'
                    , "\n\nWhat is always near but never here? " +
@@ -72,10 +76,23 @@ var challenge = [ ['agoroth'
                      "I wish you much doom and misery on your journey. I shall bother you no more. " + 
                      "Please I beg of you, if there are any other juice souls you find on your journey send them into the Black Woods. Be Gone!"
                    ,"HA HA HAHAHA! I HUNGER! Please don't fear! I will consume your flesh, however you soul will remain intact forever racked " +
-                    "with torment and pain under my control in the Dark Forest!" ], ];
+                    "with torment and pain under my control in the Dark Forest!" ],
+
+                  ['delirium weaver'
+                   , "\n\nA boy has as many sisters as brothers, but each sister has only half " + 
+                     "as many sisters as brothers. How many brothers and sisters are there in the family?" +
+                     "\nA 4 brothers and 2 sisters" + 
+                     "\nB 5 brothers and 5 sisters" +
+                     "\nC 4 brothers and 4 sisters" +
+                     "\nD 4 brothers and 3 sisters"
+                   , "Yessssss, ssssseven ssssavory children! You may passssss tassssty traveler. I hope to sssssee you again..."
+                   , "Boil and coil and toil and oil! Fresh flesh for me the thresh! Dreams will take you far and wide, my nightmare " +
+                     "will blind you, find you and grind you, TO FODDER!"
+                  ], ];
 
 // monster_name, monster_image, riddle, correct_answer, monster_faught, row_location_after_fight, col_location_after_fight
-var monsters = [ ['agoroth', imagesMonsters[0], challenge[0], 'A', false, 9, 0 ], ];
+var monsters = [ ['agoroth', imagesMonsters[0], challenge[0], 'A', false, 9, 0 ]
+                ,['delirium weaver', imagesMonsters[1], challenge[1], 'D', false, 0, 21 ] ];
 
 let regions_map = new Map([ ['swap', require("./Resources/mangrove.png") ],
                             ['forest', require("./Resources/background.png") ], ])
