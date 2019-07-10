@@ -196,167 +196,170 @@ export default class HelloWorldApp extends Component {
   render() {
     return (
 
-      <View style={{ flex: 1, alignItems: "flex-end" }}>
+      <View style={{ flex: 1 }}>
         <ImageBackground style={{flex: 1}}
           source={this.state.backgroundSource} style={ styles.image}>
-          <Text>{this.state.lives}</Text>
-          
-          <NavButton 
-            text="N"
-            onPress={() => {
-              this.setState({ buttonPressed: "n" })
-              this.backgroundChanger( 'placeholder' );
-              if( currentRow > 0 ) {
-                if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
-                  currentRow--;
-                  this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") });
-                  
-                } else {
-                  this.setState({ displayText: story_map.get ( maze[ currentRow - 1 ][ currentCol ] + "") }); 
-                }
-              } else {
-                this.setState({ displayText: "There is no path this way, you turn back." });
-              }
-            }}
-          />
-
-          <NavButton 
-          text="S"
-          onPress={() => {
-            this.setState({ buttonPressed: 's' })
-            this.backgroundChanger( 'placeholder' );
-            if( currentRow < row_limit ) {
-              if( maze[ currentRow + 1 ][ currentCol ] !== -1 ) {
-                currentRow++;
-                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") });
-              } else {
-                this.setState({displayText: story_map.get( maze[ currentRow + 1 ][ currentCol ] + "") });
-              }
-            } else {
-              this.setState({ displayText:"There is no path this way, you turn around." });
-            }
-          }}
-          
-        />
-
-        <NavButton 
-          text="E"
-          onPress={() => {
-            this.setState({ buttonPressed: 'e' })
-            this.backgroundChanger( 'placeholder' );
-            if( currentCol < col_limit ) {
-              if( maze[ currentRow ][ currentCol + 1 ] !== -1 ) {
-                currentCol++;
-                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") })
-              } else {
-                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol + 1 ] + "") })              
-              }
-            } else {
-              this.setState({ displayText:"There is no path this way, you turn around."  })
-            }
-          }}
-        />
-
-        <NavButton 
-          text="W"
-          onPress={() => {
-            this.setState({ buttonPressed: 'w' })
-            this.backgroundChanger( 'placeholder' );
-            if( currentCol > 0 ) {
-              if( maze[ currentRow ][ currentCol - 1 ] !== -1 ) {
-                currentCol--;
-                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") })
-              } else {
-                this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol - 1 ] + "") })
-              }
-            } else {
-              this.setState({ displayText:"There is no path this way, you turn around." })
-            }
-          }
-        }
-        />
-
-        
-        </ImageBackground>
-
-        <ScrollView style={styles.scrollViewStyle} >
-          <View style={{ flexGrow: 1}}>
-              <InteractButton text="Fight!"
+            
+          <View style={{ flex: 1, flexDirection:'row' }}>
+            <Text style={{ flex:1, justifyContent:'flex-start', color: 'white'}}>{this.state.lives}</Text>
+            <MiniMap style={{ flex: 1, justifyContent:'flex-end'}}></MiniMap>
+          </View>
+          <View style={{flex: 1, flexDirection:'column'}}>
+            <View style={{ flex:1, justifyContent: 'flex-start'}}>
+              <NavButton 
+                text="N"
                 onPress={() => {
-                  fighting = true;
-                  showInteractionBtn = true;
-                  this.moveTowardMoster();
-                  this.getMonster();
-                  if( isNaN( maze[ currentRow ][ currentCol ] ) ) {
-                    showInteractionBtn = false;
-                    this.displayRiddle( maze[ currentRow ][ currentCol] )
-
+                  this.setState({ buttonPressed: "n" })
+                  this.backgroundChanger( 'placeholder' );
+                  if( currentRow > 0 ) {
+                    if( maze[ currentRow - 1 ][ currentCol ] !== -1 ) {
+                      currentRow--;
+                      this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") });
+                      
+                    } else {
+                      this.setState({ displayText: story_map.get ( maze[ currentRow - 1 ][ currentCol ] + "") }); 
+                    }
+                  } else {
+                    this.setState({ displayText: "There is no path this way, you turn back." });
                   }
-                }
-              }
+                }}
               />
-              <InteractButton text="Run!"
-              onPress={() => {
-                var odds = Math.random();
-                if( odds > minor_boss ){
-                    fighting = false;
-                    this.moveAwayMoster();
-                    this.setState({ displayText: story_map.get( 'escape' ) } )
+
+              <NavButton 
+                text="S"
+                onPress={() => {
+                  this.setState({ buttonPressed: 's' })
+                  this.backgroundChanger( 'placeholder' );
+                  if( currentRow < row_limit ) {
+                    if( maze[ currentRow + 1 ][ currentCol ] !== -1 ) {
+                      currentRow++;
+                      this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") });
+                    } else {
+                      this.setState({displayText: story_map.get( maze[ currentRow + 1 ][ currentCol ] + "") });
+                    }
+                  } else {
+                    this.setState({ displayText:"There is no path this way, you turn around." });
                   }
-                else{
-                    fighting = true;
-                    this.moveTowardMoster();
-                    this.getMonster();
-                    this.setState({ displayText: story_map.get( 'caught' ) + " " +  story_map.get(maze[ currentRow ][ currentCol ] + "" ) } );
+                }}
+              />
+
+              <NavButton 
+                text="E"
+                onPress={() => {
+                  this.setState({ buttonPressed: 'e' })
+                  this.backgroundChanger( 'placeholder' );
+                  if( currentCol < col_limit ) {
+                    if( maze[ currentRow ][ currentCol + 1 ] !== -1 ) {
+                      currentCol++;
+                      this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") })
+                    } else {
+                      this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol + 1 ] + "") })              
+                    }
+                  } else {
+                    this.setState({ displayText:"There is no path this way, you turn around."  })
                   }
-                }
-              }/>
-              <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-                <Choice text="A"
-                  onPress={() => {
-                    this.checkAnswer( maze[ currentRow ][ currentCol ], 'A' );
-                    
-                  }}/>
-        
-                <Choice text="B"
-                  onPress={() => {
-                  this.checkAnswer( maze[ currentRow ][ currentCol ], 'B' );
-                    
-                  }}/>
-        
-                <Choice text="C"
-                  onPress={() => {
-                  this.checkAnswer( maze[ currentRow ][ currentCol ], 'C' );
-                    
-                  }}/>
-        
-                <Choice text="D"
-                  onPress={() => {
-                  this.checkAnswer( maze[ currentRow ][ currentCol ], 'D' );
-                    
-                  }}/>
-              </View>
-              <View>
-                <TouchableOpacity activeOpacity={0.8} onPress={this.changeLayout}>
-                  <View style={{ height: this.state.expanded ? null : 50, overflow: 'hidden' }}>
-                    <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
+                }}
+              />
+
+              <NavButton 
+                text="W"
+                onPress={() => {
+                  this.setState({ buttonPressed: 'w' })
+                  this.backgroundChanger( 'placeholder' );
+                  if( currentCol > 0 ) {
+                    if( maze[ currentRow ][ currentCol - 1 ] !== -1 ) {
+                      currentCol--;
+                      this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol ] + "") })
+                    } else {
+                      this.setState({displayText: story_map.get( maze[ currentRow ][ currentCol - 1 ] + "") })
+                    }
+                  } else {
+                    this.setState({ displayText:"There is no path this way, you turn around." })
+                  }
+                }}
+              />
             </View>
-          </ScrollView>
+            <View style={{flex: 1, justifyContent:'flex-end' }}>
+              <ScrollView style={styles.scrollViewStyle} >
+                <View style={{ flexGrow: 1}}>
+                  <InteractButton text="Fight!"
+                    onPress={() => {
+                      fighting = true;
+                      showInteractionBtn = true;
+                      this.moveTowardMoster();
+                      this.getMonster();
+                      if( isNaN( maze[ currentRow ][ currentCol ] ) ) {
+                        showInteractionBtn = false;
+                        this.displayRiddle( maze[ currentRow ][ currentCol] )
+                        
+                      }
+                    }}
+                    />
+                  <InteractButton text="Run!"
+                    onPress={() => {
+                      var odds = Math.random();
+                      if( odds > minor_boss ){
+                        fighting = false;
+                        this.moveAwayMoster();
+                        this.setState({ displayText: story_map.get( 'escape' ) } )
+                      }
+                      else{
+                        fighting = true;
+                        this.moveTowardMoster();
+                        this.getMonster();
+                        this.setState({ displayText: story_map.get( 'caught' ) + " " +  story_map.get(maze[ currentRow ][ currentCol ] + "" ) } );
+                      }
+                    }}
+                    />
+                  <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+                    <Choice text="A"
+                      onPress={() => {
+                        this.checkAnswer( maze[ currentRow ][ currentCol ], 'A' );
+                        
+                      }}/>
+            
+                    <Choice text="B"
+                      onPress={() => {
+                        this.checkAnswer( maze[ currentRow ][ currentCol ], 'B' );
+                        
+                      }}/>
+            
+                    <Choice text="C"
+                      onPress={() => {
+                      this.checkAnswer( maze[ currentRow ][ currentCol ], 'C' );
+                      
+                    }}/>
+            
+                    <Choice text="D"
+                      onPress={() => {
+                      this.checkAnswer( maze[ currentRow ][ currentCol ], 'D' );
+                      
+                    }}/>
+                  </View>
+                  <View>
+                    <TouchableOpacity activeOpacity={0.8} onPress={this.changeLayout}>
+                      <View style={{ height: this.state.expanded ? null : 50, overflow: 'hidden' }}>
+                        <Text style={ styles.displayStyle }>{this.state.displayText}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </ScrollView>
+            </View>
+          </View>
+        </ImageBackground>
       </View>
     );
   }
 }
 
 class NavButton extends Component {
-	render() {
+  render() {
     var position = maze[ currentRow ][ currentCol ];
     const display = ( position > 3 || fighting ) ? "none" : "flex" 
 		const { text, onPress } = this.props;
 		return (
-		  <TouchableOpacity style={[styles.buttonStyle, { display } ] }
+      <TouchableOpacity style={[styles.buttonStyle, { display } ] }
       onPress={() => onPress()}
       >
 			 <Text style={styles.textStyle}>{text}</Text>
@@ -395,7 +398,32 @@ class Choice extends Component {
 	}
 }
 
+class MiniMap extends Component {
+  render() {
+    return (
+      <View style={styles.miniMap}>
+        <View/>
+      </View>
+    )
+  }
+}
+
 const styles = StyleSheet.create( {
+
+  cell: {
+    width: 120,
+    height: 120,
+    backgroundColor: 'black'
+  },
+
+  miniMap: {
+    width: 100,
+    height: 100,
+    opacity: .3,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    backgroundColor: 'black',
+  },
 
   outputBox: {
     backgroundColor: 'grey',
