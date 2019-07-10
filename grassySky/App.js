@@ -400,9 +400,19 @@ class Choice extends Component {
 
 class MiniMap extends Component {
   render() {
+    var cells = [];
+    var unique_id = 0;
+    for( let i = 0; i < row_limit; i++ ){
+      for( let j = 0; j < col_limit; j++ ){
+        cells.push(
+          <View key = { unique_id } style={ styles.cell }/>
+        )
+        unique_id++;
+      }
+    }
     return (
       <View style={styles.miniMap}>
-        <View/>
+        { cells }
       </View>
     )
   }
@@ -411,18 +421,18 @@ class MiniMap extends Component {
 const styles = StyleSheet.create( {
 
   cell: {
-    width: 120,
-    height: 120,
-    backgroundColor: 'black'
+    width: 4,
+    height: 4,
+    backgroundColor: 'red'
   },
 
   miniMap: {
     width: 100,
     height: 100,
     opacity: .3,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    flexWrap: 'wrap',
     backgroundColor: 'black',
+
   },
 
   outputBox: {
