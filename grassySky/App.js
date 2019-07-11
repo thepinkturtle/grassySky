@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { StyleSheet} from 'react-native';
-import { TouchableOpacity, ScrollView, ImageBackground, LayoutAnimation } from 'react-native';
+import { TouchableOpacity, ScrollView, ImageBackground, LayoutAnimation, FlatList, Dimensions  } from 'react-native';
 
 var maze = [
            [  0,             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  3,  4,  'delirium weaver', -1,  0,  0,  0 ]
@@ -192,7 +192,6 @@ export default class HelloWorldApp extends Component {
     this.setState({ expanded: !this.state.expanded });
   }
 
-
   render() {
     return (
 
@@ -202,8 +201,14 @@ export default class HelloWorldApp extends Component {
             
           <View style={{ flex: 1, flexDirection:'row' }}>
             <Text style={{ flex:1, justifyContent:'flex-start', color: 'white'}}>{this.state.lives}</Text>
-            <MiniMap style={{ flex: 1, justifyContent:'flex-end'}}></MiniMap>
+            <MiniMap style={{ flex: 1, justifyContent:'flex-end'}} 
+              onPress={() => {
+                alert( key );
+              
+              }}
+            />
           </View>
+
           <View style={{flex: 1, flexDirection:'column'}}>
             <View style={{ flex:1, justifyContent: 'flex-start'}}>
               <NavButton 
@@ -399,21 +404,30 @@ class Choice extends Component {
 }
 
 class MiniMap extends Component {
+
   render() {
     var cells = [];
-    var unique_id = 0;
+    const { onPress } = this.props;
+
+    
+
     for( let i = 0; i < row_limit; i++ ){
       for( let j = 0; j < col_limit; j++ ){
         cells.push(
-          <View key = { unique_id } style={ styles.cell }/>
+          <View key = { i + "," + j } style={ styles.cell } />
         )
-        unique_id++;
       }
     }
     return (
-      <View style={styles.miniMap}>
-        { cells }
-      </View>
+      <TouchableOpacity
+      onPress={() => onPress()}>
+        <View style={styles.miniMap}>
+          { maze.map( ( item, key ) => (
+            <View key={key} style={ key !== 'agoroth' ? styles.visitedCell : styles.cell } />
+            )
+          )}
+        </View>
+      </TouchableOpacity>  
     )
   }
 }
@@ -421,8 +435,14 @@ class MiniMap extends Component {
 const styles = StyleSheet.create( {
 
   cell: {
-    width: 4,
-    height: 4,
+    width: 10,
+    height: 10,
+    backgroundColor: 'black'
+  },
+  visitedCell: {
+    width: 10,
+    height: 10,
+    opacity: .3,
     backgroundColor: 'red'
   },
 
@@ -431,8 +451,7 @@ const styles = StyleSheet.create( {
     height: 100,
     opacity: .3,
     flexWrap: 'wrap',
-    backgroundColor: 'black',
-
+    backgroundColor: 'white',
   },
 
   outputBox: {
